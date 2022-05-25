@@ -3,7 +3,7 @@ import notifee, { AndroidStyle, AndroidCategory, AndroidColor, EventType, Androi
 import {
     Alert
 } from 'react-native';
-import { initial, notificationPress, actionPress } from './function';
+import { initial, notificationPress, actionPress } from './functions';
 
 
 export default class NotificationHandler {
