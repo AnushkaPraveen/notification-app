@@ -12,46 +12,29 @@ import DropDownPicker from 'react-native-dropdown-picker';
 import NotificationHandler from '../notification/notification';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import RNPickerSelect from 'react-native-picker-select';
-import { SketchPicker } from 'react-color';
 
 let notificationHandler = new NotificationHandler();
 
-const CreateLocalNotification = () => {
+const CreateProgressNotification = () => {
   const [values, setvalues] = useState({
     channelId: '',
     channelName: '',
     notificationId: '',
     title: '',
     body: '',
-    color: '',
-    icon: null,
-    image: null,
     importance: 0,
     vibration: null,
-    subtitle: '',
     visibility: 0,
     time: null,
     ongoing:null,
-    asForegroundService:null,
-    colorized:null
+    progressSize:0,
+    currentSize:'',
+    indeterminate:null,
+    color:''
+    
   });
 
-  const onDisplayNotification = async () => {
-    const channelId = await notifee.createChannel({
-      id: values.channelId,
-      name: values.channelName,
-    });
 
-    await notifee.requestPermission();
-    await notifee.displayNotification({
-      title: values.title,
-      body: values.body,
-      android: {
-        channelId,
-        smallIcon: 'ic_launcher',
-      },
-    });
-  };
 
   const handleChange = (state, value) => {
     console.log(state, value);
@@ -62,6 +45,7 @@ const CreateLocalNotification = () => {
   };
 
   const setNotifcation = () => {
+      console.log(parseInt(values.progressSize));
     const payload = {
       channelId: values.channelId,
       name: values.channelName,
@@ -71,23 +55,20 @@ const CreateLocalNotification = () => {
       importance: values.importance,
       vibration: values.vibration,
       visibility: values.visibility,
-      Icon: values.icon,
-      color: values.color,
       time: values.time,
       ongoing:values.ongoing,
-      foregroundService:values.asForegroundService,
-      colorized:values.colorized,
-      image:values.image
+      indeterminate:values.indeterminate,
+      progressSize:parseInt(values.progressSize),
+      currentSize:parseInt(values.currentSize),
+      color:values.color
     };
-    notificationHandler.getNotification(payload);
+    notificationHandler.progressNotification(payload);
   };
 
   return (
     <SafeAreaView>
       <ScrollView>
-      
         <View>
-        
           <Text style={styles.topic}>Android Channel Setup</Text>
           <Text style={styles.inputText}>Channel Id</Text>
           <TextInput
@@ -103,37 +84,12 @@ const CreateLocalNotification = () => {
           />
           <View>
             <Text style={styles.inputText}>Vibration</Text>
-            
             <RNPickerSelect
               onValueChange={value => handleChange('vibration', value)}
               items={[
                 {label: 'On', value: true},
                 {label: 'Off', value: false},
               ]}
-              style={{
-                ...pickerSelectStyles,
-                iconContainer: {
-                  top: 20,
-                  right: 10,
-                  borderWidth: 1,
-                  borderColor: 'red',
-                },
-                placeholder: {
-                  color: 'purple',
-                  fontSize: 12,
-                  fontWeight: 'bold',
-                },
-                inputAndroid: {
-                  fontSize: 16,
-                  paddingHorizontal: 10,
-                  paddingVertical: 8,
-                  borderWidth: 0.5,
-                  borderColor: 'purple',
-                  borderRadius: 8,
-                  color: 'black',
-                  paddingRight: 30, // to ensure the text is never behind the icon
-                },
-              }}
             />
           </View>
         </View>
@@ -152,12 +108,6 @@ const CreateLocalNotification = () => {
             value={values.title}
             onChangeText={text => handleChange('title', text)}
           />
-          <Text style={styles.inputText}>Subtitle</Text>
-          <TextInput
-            style={styles.input}
-            value={values.subtitle}
-            onChangeText={text => handleChange('subtitle', text)}
-          />
           <Text style={styles.inputText}>Notification Body</Text>
           <TextInput
             style={styles.input}
@@ -166,24 +116,26 @@ const CreateLocalNotification = () => {
           />
         </View>
 
-        <Text style={styles.topic}>Android Notification Setup</Text>
-        <Text style={styles.inputText}>Color</Text>
+        <Text style={styles.topic}>Android Notification Setup</Text>    
+       
+        <Text style={styles.inputText}>Progress Size</Text>
+          <TextInput
+            style={styles.input}
+            value={values.progressSize}
+            keyboardType='numeric'
+            onChangeText={text => handleChange('progressSize',text)}
+          />
+          <Text style={styles.inputText}>Current Size</Text>
+          <TextInput
+            style={styles.input}
+            value={values.currentSize}
+            onChangeText={text => handleChange('currentSize', text)}
+          />
+          <Text style={styles.inputText}>Color</Text>
         <TextInput
           style={styles.input}
           value={values.color}
           onChangeText={text => handleChange('color', text)}
-        />
-        <Text style={styles.inputText}>Notification Large Icon</Text>
-        <TextInput
-          style={styles.input}
-          value={values.icon}
-          onChangeText={text => handleChange('icon', text)}
-        />
-        <Text style={styles.inputText}>Image</Text>
-        <TextInput
-          style={styles.input}
-          value={values.image}
-          onChangeText={text => handleChange('image', text)}
         />
         <View>
           <Text style={styles.inputText}>Importance</Text>
@@ -230,35 +182,18 @@ const CreateLocalNotification = () => {
           />
         </View>
         <View>
-          <Text style={styles.inputText}>asForegroundService</Text>
+          <Text style={styles.inputText}>indeterminate</Text>
           <RNPickerSelect
-            onValueChange={value => handleChange('asForegroundService', value)}
+            onValueChange={value => handleChange('indeterminate', value)}
             items={[
               {label: 'On', value: true},
               {label: 'Off', value: false},
             ]}
           />
         </View>
-        <View>
-          <Text style={styles.inputText}>colorized</Text>
-          <RNPickerSelect
-            onValueChange={value => handleChange('colorized', value)}
-            items={[
-              {label: 'On', value: true},
-              {label: 'Off', value: false},
-            ]}
-          />
-        </View>
+        
 
-        <View>
-        <Text style={styles.topic}>iOS Notification Setup</Text>
-        <Text style={styles.inputText}>Color</Text>
-        <TextInput
-          style={styles.input}
-          value={values.color}
-          onChangeText={text => handleChange('color', text)}
-        />
-        </View>
+      
 
         <View style={styles.buttonArea}>
           <Button title="Submit" onPress={setNotifcation} />
@@ -320,4 +255,4 @@ const pickerSelectStyles = StyleSheet.create({
   },
 });
 
-export default CreateLocalNotification;
+export default CreateProgressNotification;

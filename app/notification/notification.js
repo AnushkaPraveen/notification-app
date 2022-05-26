@@ -102,7 +102,7 @@ export default class NotificationHandler {
                     largeIcon: payload.Icon || 'ic_launcher',
                     smallIcon: 'ic_launcher', // optional, defaults to 'ic_launcher'.
                     style: { type: AndroidStyle.BIGTEXT, text: payload.body },
-                    style: { type: AndroidStyle.BIGPICTURE, picture: payload.image },
+                   /*  style: { type: AndroidStyle.BIGPICTURE, picture: payload.image }, */
                     /* style: payload.image || undefined, */
                     showTimestamp: payload.time || false,
                     importance: payload.importance || 3,
@@ -430,16 +430,19 @@ export default class NotificationHandler {
 
 
     cancelNotification = async(notificationId) => {
+        console.log(notificationId);
         await notifee.cancelNotification(notificationId)
     }
 
     deleteChannel = async(channelId) => {
+        console.log(channelId);
         await notifee.deleteChannel(channelId)
     }
 
 
     //Progress Indicators
     progressNotification = async(payload) => {
+        console.log(payload);
 
         //notifee foreground event action handle (swicth)
         notifee.onForegroundEvent(async({ type, detail }) => {
@@ -471,6 +474,7 @@ export default class NotificationHandler {
             name: payload.name || 'default channel',
             importance: payload.importance || 3,
             visibility: payload.visibility || 0,
+            vibration: payload.vibration || true,
         });
 
         notifee.displayNotification({
@@ -482,7 +486,9 @@ export default class NotificationHandler {
                 channelId,
                 showTimestamp: payload.time || false,
                 ongoing: payload.ongoing || false,
+                color:payload.color || '#FF0000', 
                 style: { type: AndroidStyle.BIGTEXT, text: payload.body },
+
                 progress: {
                     max: payload.progressSize || 0,
                     current: payload.currentSize || 0,

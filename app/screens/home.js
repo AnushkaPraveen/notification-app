@@ -41,7 +41,10 @@ const Home=({navigation})=>{
             <Button onPress={()=>navigation.navigate('CreateNotification')} title="Create Local Notification"/>
             </View>
             <View style={styles.styleLoginBtn}> 
-            <Button title="Handle Notification"/>
+            <Button title="Handle Notification" onPress={()=>navigation.navigate('HandleNotification')}/>
+            </View>
+            <View style={styles.styleLoginBtn}> 
+            <Button title="Create Progress Notification" onPress={()=>navigation.navigate('CreateProgressNotification')}/>
             </View>
         </View>
     )
