@@ -26,7 +26,7 @@ export default class NotificationHandler {
     }
 
     getNotification = async(payload) => {
-        console.log('this is payload', payload.time);
+        console.log('this is payload', payload.image);
         this.getIOSPermission()
 
         //notifee foreground event action handle (swicth)
@@ -102,7 +102,8 @@ export default class NotificationHandler {
                     largeIcon: payload.Icon || 'ic_launcher',
                     smallIcon: 'ic_launcher', // optional, defaults to 'ic_launcher'.
                     style: { type: AndroidStyle.BIGTEXT, text: payload.body },
-                    style: payload.image || undefined,
+                    style: { type: AndroidStyle.BIGPICTURE, picture: payload.image },
+                    /* style: payload.image || undefined, */
                     showTimestamp: payload.time || false,
                     importance: payload.importance || 3,
                     color: payload.color || '#495371',

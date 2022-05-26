@@ -24,6 +24,7 @@ const App= () => {
       <Stack.Navigator initialRouteName="Home">
         <Stack.Screen name="Home" component={Home} />
         <Stack.Screen name="CreateNotification" component={CreateNotification} />
+        <Stack.Screen name="CreateNotification" component={CreateNotification} />
       </Stack.Navigator>
     </NavigationContainer>
   );

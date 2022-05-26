@@ -1,5 +1,5 @@
 import React from "react";
-import {View,Text,Button} from "react-native";
+import {View,Text,Button,StyleSheet} from "react-native";
 import notifee, { TimestampTrigger, TriggerType, TimeUnit ,AndroidVisibility,AndroidCategory,AndroidImportance } from '@notifee/react-native';
 
 
@@ -34,11 +34,31 @@ const Home=({navigation})=>{
     return(
         <View>
             <Text>This is Home page</Text>
-            <Button onPress={onDisplayNotification} title="Get Notification"/>
+            <View style={styles.styleLoginBtn}> 
+            <Button onPress={onDisplayNotification} color={'#234543'} title="Get Notification"/>
+            </View>
+            <View style={styles.styleLoginBtn}> 
             <Button onPress={()=>navigation.navigate('CreateNotification')} title="Create Local Notification"/>
-            <Button title="Create Local Notification"/>
+            </View>
+            <View style={styles.styleLoginBtn}> 
+            <Button title="Handle Notification"/>
+            </View>
         </View>
     )
 }
+
+
+const styles = StyleSheet.create({
+  styleLoginBtn: {
+    marginTop: 30,
+    marginLeft: 50,
+    marginRight: 50,
+    borderWidth: 1,
+    borderRadius: 10,
+    borderColor: "black", //button background/border color
+    overflow: "hidden",
+    marginBottom: 10
+  },
+});
 
 export default Home;

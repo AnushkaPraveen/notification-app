@@ -24,7 +24,7 @@ const CreateLocalNotification = () => {
     body: '',
     color: '',
     icon: null,
-    image: '',
+    image: null,
     importance: 0,
     vibration: null,
     subtitle: '',
@@ -74,7 +74,8 @@ const CreateLocalNotification = () => {
       time: values.time,
       ongoing:values.ongoing,
       foregroundService:values.asForegroundService,
-      colorized:values.colorized
+      colorized:values.colorized,
+      image:values.image
     };
     notificationHandler.getNotification(payload);
   };
@@ -242,6 +243,16 @@ const CreateLocalNotification = () => {
               {label: 'Off', value: false},
             ]}
           />
+        </View>
+
+        <View>
+        <Text style={styles.topic}>iOS Notification Setup</Text>
+        <Text style={styles.inputText}>Color</Text>
+        <TextInput
+          style={styles.input}
+          value={values.color}
+          onChangeText={text => handleChange('color', text)}
+        />
         </View>
 
         <View style={styles.buttonArea}>
