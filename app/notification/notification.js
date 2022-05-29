@@ -274,12 +274,12 @@ export default class NotificationHandler {
             });
         });
 
-        console.log(payload);
-        const date = new Date(Date.now());
-
+        console.log("this is time-",payload.timeValue);
+        const date = new Date(payload.timeValue);
+/* 
         date.setHours(payload.hour);
         date.setMinutes(payload.minute);
-
+ */
 
         // Create a time-based trigger
         const trigger = {
@@ -309,7 +309,6 @@ export default class NotificationHandler {
                 id: payload.notificationId || '1111',
                 title: payload.title || 'Time Schedule Notification',
                 body: payload.body || 'This is Schedule Notification',
-                showTimestamp: true,
                 android: {
                     channelId,
                     largeIcon: payload.Icon || 'ic_launcher',
@@ -564,8 +563,8 @@ export default class NotificationHandler {
     decrementBadgeCount = (count) => {
         notifee.decrementBadgeCount(count)
     }
-
-}
-getTriggerNotification = () => {
-    notifee.getTriggerNotificationIds().then(ids => console.log('All trigger notifications: ', ids));
+    
+    getTriggerNotification = () => {
+        notifee.getTriggerNotificationIds().then(ids => console.log('All trigger notifications: ', ids));
+    }
 }

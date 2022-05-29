@@ -17,17 +17,20 @@ import CreateNotification from "./app/screens/createLocalNotification"
 import HandleNotification from './app/screens/handleNotification';
 import CreateProgressNotification from './app/screens/createProgressNotification';
 
+import SubHome from './app/screens/subHome';
+
 const Stack = createNativeStackNavigator();
 
 const App= () => {
  
   return (
-    <NavigationContainer>
+    <NavigationContainer independent={true}>
       <Stack.Navigator initialRouteName="Home">
         <Stack.Screen name="Home" component={Home} />
-        <Stack.Screen name="CreateNotification" component={CreateNotification} />
-        <Stack.Screen name="HandleNotification" component={HandleNotification} />
-        <Stack.Screen name="CreateProgressNotification" component={CreateProgressNotification} />
+        <Stack.Screen name="CreateNotification" options={{ title: 'Create/Update Notification' }} component={CreateNotification} />
+        <Stack.Screen name="HandleNotification" options={{ title: 'Handle Notification' }} component={HandleNotification} />
+        <Stack.Screen name="CreateProgressNotification" options={{ title: 'Create/Update Progress Notificiation' }} component={CreateProgressNotification} />
+        <Stack.Screen name="SubHome" options={{ title: 'Shedule Notifications' }} component={SubHome} />
       </Stack.Navigator>
     </NavigationContainer>
   );

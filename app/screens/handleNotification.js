@@ -19,6 +19,7 @@ const HandleNotification = () => {
      notificationId:'',
      channelId:''
       });
+    const[triggerNotifications,settriggerNotification]=useState([])
 
       const handleChange = (state, value) => {
         console.log(state, value);
@@ -47,9 +48,9 @@ const HandleNotification = () => {
         </View>
       </View>
       <View>
-        <Text>iOS Functions</Text>
+        <Text>Trigger Notifications</Text>
         <View>
-          <Button title='test'/>
+          <Button title='test' onPress={notificationHandler.getTriggerNotification}/>
         </View>
       </View>
     </ScrollView>

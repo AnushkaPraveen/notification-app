@@ -46,6 +46,9 @@ const Home=({navigation})=>{
             <View style={styles.styleLoginBtn}> 
             <Button title="Create Progress Notification" onPress={()=>navigation.navigate('CreateProgressNotification')}/>
             </View>
+            <View style={styles.styleLoginBtn}> 
+            <Button title="Shedule Notification" onPress={()=>navigation.navigate('SubHome')}/>
+            </View>
         </View>
     )
 }
