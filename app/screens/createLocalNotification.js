@@ -84,7 +84,7 @@ const CreateLocalNotification = () => {
 
   return (
     <SafeAreaView>
-      <ScrollView>
+      <ScrollView style={{backgroundColor:'white'}}>
       
         <View>
         
@@ -273,7 +273,7 @@ const styles = StyleSheet.create({
     marginRight: 20,
     marginLeft: 20,
     marginBottom: 15,
-    height: 40,
+    height: 50,
     borderColor: '#000000',
     borderWidth: 1,
     borderRadius: 8,
@@ -282,6 +282,7 @@ const styles = StyleSheet.create({
   inputText: {
     marginLeft: 20,
     color: '#000000',
+    
   },
   buttonArea: {
     flex: 1,
@@ -290,7 +291,7 @@ const styles = StyleSheet.create({
     marginBottom: 15,
   },
   topic: {
-    fontSize: 20,
+    fontSize: 25,
     marginLeft: 15,
     fontWeight: 'bold',
     marginTop: 10,
