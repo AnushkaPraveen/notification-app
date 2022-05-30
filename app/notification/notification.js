@@ -565,6 +565,6 @@ export default class NotificationHandler {
     }
     
     getTriggerNotification = () => {
-        notifee.getTriggerNotificationIds().then(ids => console.log('All trigger notifications: ', ids));
+        notifee.getTriggerNotificationIds().then(function(ids){return "Hello"});
     }
 }
