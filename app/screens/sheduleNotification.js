@@ -95,7 +95,7 @@ const SheduleNotification = () => {
 
   return (
     <SafeAreaView>
-      <ScrollView>
+      <ScrollView style={{backgroundColor:'white'}}>
       
         <View>
         

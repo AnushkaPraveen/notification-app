@@ -6,6 +6,7 @@ import {
   TextInput,
   StyleSheet,
   ScrollView,
+  TouchableOpacity
 } from 'react-native';
 import NotificationHandler from '../notification/notification';
 
@@ -28,29 +29,42 @@ const HandleNotification = () => {
           [state]: value,
         });
       };
+      const getData=()=>{
+        settriggerNotification(notificationHandler.getTriggerNotification)
+        console.log(triggerNotifications);
+      }
     
   return (
-    <ScrollView>
+    <ScrollView style={{backgroundColor:'white'}}>
       <View>
-        <Text>Common Functions</Text>
+        <Text style={styles.topic}>Common Functions</Text>
         <Text style={styles.inputText}>Cancel Notification</Text>
         <TextInput style={styles.input} onChangeText={text => handleChange('notificationId', text)}/>
         <View>
-          <Button title='Cancel Notification' onPress={()=>{notificationHandler.cancelNotification(values.notificationId)}}/>
+        <TouchableOpacity style={styles.ButtonContainer} onPress={()=>{notificationHandler.cancelNotification(values.notificationId)}}>
+          <Text style={styles.ButtonText}>Cancel Notification</Text>
+        </TouchableOpacity>
+          
         </View>
       </View>
       <View>
-        <Text>Android Functions</Text>
+        <Text style={styles.topic}>Android Functions</Text>
         <Text style={styles.inputText}>Delete Channel</Text>
         <TextInput style={styles.input} onChangeText={text => handleChange('channelId', text)}/>
         <View>
-          <Button title='Delete Channel' onPress={()=>{notificationHandler.deleteChannel(values.channelId)}}/>
+        <TouchableOpacity style={styles.ButtonContainer} onPress={()=>{notificationHandler.deleteChannel(values.channelId)}}>
+          <Text style={styles.ButtonText}>Delete Channel</Text>
+        </TouchableOpacity>
+          
         </View>
       </View>
       <View>
-        <Text>Trigger Notifications</Text>
+        <Text style={styles.topic}>Trigger Notifications</Text>
         <View>
-          <Button title='test' onPress={notificationHandler.getTriggerNotification}/>
+        <TouchableOpacity style={styles.ButtonContainer}>
+          <Text style={styles.ButtonText}>Delete Channel</Text>
+        </TouchableOpacity>
+        
         </View>
       </View>
     </ScrollView>
@@ -79,11 +93,32 @@ const styles = StyleSheet.create({
     marginBottom: 15,
   },
   topic: {
-    fontSize: 20,
+    fontSize: 25,
     marginLeft: 15,
     fontWeight: 'bold',
     marginTop: 10,
   },
+  ButtonContainer: {
+    elevation: 8,
+    backgroundColor: "#553C9A",
+    borderRadius: 10,
+    paddingVertical: 10,
+    paddingHorizontal: 12,
+    marginTop: 0,
+    marginLeft: 50,
+    marginRight: 50,
+    marginBottom: 10,
+    
+  },
+  ButtonText: {
+    fontSize: 18,
+    color: "#fff",
+    fontWeight: "bold",
+    alignSelf: "center",
+    textTransform: "uppercase",
+    textAlign: 'center',
+    padding:5
+  }
 });
 
 const pickerSelectStyles = StyleSheet.create({
