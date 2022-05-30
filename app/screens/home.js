@@ -1,5 +1,5 @@
 import React from "react";
-import {View,Text,Button,StyleSheet} from "react-native";
+import {View,Text,Button,StyleSheet,Image,TouchableOpacity,ScrollView} from "react-native";
 import notifee, { TimestampTrigger, TriggerType, TimeUnit ,AndroidVisibility,AndroidCategory,AndroidImportance } from '@notifee/react-native';
 
 
@@ -32,24 +32,42 @@ const Home=({navigation})=>{
         });
       }
     return(
-        <View>
-            <Text>This is Home page</Text>
-            <View style={styles.styleLoginBtn}> 
-            <Button onPress={onDisplayNotification} color={'#234543'} title="Get Notification"/>
-            </View>
-            <View style={styles.styleLoginBtn}> 
-            <Button onPress={()=>navigation.navigate('CreateNotification')} title="Create Local Notification"/>
-            </View>
-            <View style={styles.styleLoginBtn}> 
-            <Button title="Handle Notification" onPress={()=>navigation.navigate('HandleNotification')}/>
-            </View>
-            <View style={styles.styleLoginBtn}> 
-            <Button title="Create Progress Notification" onPress={()=>navigation.navigate('CreateProgressNotification')}/>
-            </View>
-            <View style={styles.styleLoginBtn}> 
-            <Button title="Shedule Notification" onPress={()=>navigation.navigate('SubHome')}/>
-            </View>
+        <ScrollView style={{backgroundColor:'white'}}>
+        <View style={styles.topArea}>
+        <Text style={styles.mainTopic}>Notifee Demo</Text>
+        <Image source={require('../images/notifee.png')} style={styles.logo}/>
         </View>
+            <View> 
+            <TouchableOpacity
+                 style={styles.ButtonContainer} onPress={onDisplayNotification}><Text style={styles.ButtonText}>Quick Notification</Text>
+            </TouchableOpacity> 
+            </View>
+            <View> 
+            <TouchableOpacity
+                 style={styles.ButtonContainer} onPress={()=>navigation.navigate('CreateNotification')}><Text style={styles.ButtonText}>Create Local Notification</Text>
+            </TouchableOpacity> 
+            </View>
+            <View>
+            <TouchableOpacity
+                 style={styles.ButtonContainer} onPress={()=>navigation.navigate('HandleNotification')}><Text style={styles.ButtonText}>Handle Notification</Text>
+            </TouchableOpacity>  
+            </View>
+            <View>
+            <TouchableOpacity
+                 style={styles.ButtonContainer} onPress={()=>navigation.navigate('CreateProgressNotification')}><Text style={styles.ButtonText}>Create Progress Notification</Text>
+            </TouchableOpacity> 
+            </View>
+            <View> 
+            <TouchableOpacity
+                 style={styles.ButtonContainer} onPress={()=>navigation.navigate('SubHome')}><Text style={styles.ButtonText}>Shedule Notification</Text>
+            </TouchableOpacity>
+            </View>
+            <View> 
+            <TouchableOpacity
+                 style={styles.ButtonContainer} onPress={()=>navigation.navigate('Help')}><Text style={styles.ButtonText}>Help</Text>
+            </TouchableOpacity>
+            </View>
+        </ScrollView>
     )
 }
 
@@ -63,8 +81,45 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     borderColor: "black", //button background/border color
     overflow: "hidden",
-    marginBottom: 10
+    marginBottom: 10,
+    padding:10
   },
+topArea:{
+    justifyContent:'center',
+    alignItems:'center'
+  },
+  mainTopic:{
+    fontSize:35,
+    fontWeight:'bold',
+    color:'black',
+    marginTop:30
+  },
+  logo:{
+    width:200,
+    height:200,
+   
+  },
+ ButtonContainer: {
+    elevation: 8,
+    backgroundColor: "#553C9A",
+    borderRadius: 10,
+    paddingVertical: 10,
+    paddingHorizontal: 12,
+    marginTop: 30,
+    marginLeft: 50,
+    marginRight: 50,
+    marginBottom: 10,
+    
+  },
+  ButtonText: {
+    fontSize: 18,
+    color: "#fff",
+    fontWeight: "bold",
+    alignSelf: "center",
+    textTransform: "uppercase",
+    textAlign: 'center',
+    padding:5
+  }
 });
 
 export default Home;
