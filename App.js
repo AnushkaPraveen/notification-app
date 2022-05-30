@@ -16,6 +16,7 @@ import Home from "./app/screens/home"
 import CreateNotification from "./app/screens/createLocalNotification"
 import HandleNotification from './app/screens/handleNotification';
 import CreateProgressNotification from './app/screens/createProgressNotification';
+import Help from './app/screens/help';
 
 import SubHome from './app/screens/subHome';
 
@@ -26,11 +27,12 @@ const App= () => {
   return (
     <NavigationContainer independent={true}>
       <Stack.Navigator initialRouteName="Home">
-        <Stack.Screen name="Home" component={Home} />
+        <Stack.Screen name="Home" options={{headerShown: false}} component={Home} />
         <Stack.Screen name="CreateNotification" options={{ title: 'Create/Update Notification' }} component={CreateNotification} />
         <Stack.Screen name="HandleNotification" options={{ title: 'Handle Notification' }} component={HandleNotification} />
         <Stack.Screen name="CreateProgressNotification" options={{ title: 'Create/Update Progress Notificiation' }} component={CreateProgressNotification} />
         <Stack.Screen name="SubHome" options={{ title: 'Shedule Notifications' }} component={SubHome} />
+        <Stack.Screen name="Help" options={{ title: 'Help' }} component={Help} />
       </Stack.Navigator>
     </NavigationContainer>
   );
