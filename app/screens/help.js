@@ -1,11 +1,10 @@
 import React,{useState} from "react";
-import {View,Text,Button,StyleSheet,Image,TouchableOpacity,ScrollView,Linking,Modal} from "react-native";
+import {View,Text,Button,StyleSheet,Image,TouchableOpacity,ScrollView,Linking} from "react-native";
 import RNFetchBlob from 'rn-fetch-blob'
-import { CromaColorPicker as ColorPicker } from "croma-color-picker";
+
 
 const Help=()=>{
-  const[color,setColor]=useState('')
-  const [modalVisible, setModalVisible] = useState(false);
+
 /* const { config, fs } = RNFetchBlob
 let PictureDir = fs.dirs.PictureDir // this is the pictures directory. You can check the available directories in the wiki.
 let options = {
@@ -77,23 +76,6 @@ const fileDownload=async()=>{
 
  return(
      <View>
-     <Modal
-        animationType="slide"
-        transparent={true}
-        visible={modalVisible}
-        onRequestClose={() => {
-          Alert.alert("Modal has been closed.");
-          setModalVisible(!modalVisible);
-        }}
-      ><View style={styles.centeredView}>
-          <View style={styles.modalView}>
-          <ColorPicker
-          onChangeColor={color => {
-            setColor(color);
-          }}
-          style={[{ height: 350 }]}
-        /><Text>Hello</Text></View></View></Modal>
-      <Button title="open" onPress={()=>{setModalVisible(true)}}/>
      <View style={styles.mainContainer}>
     
      <TouchableOpacity style={styles.category_card} onPress={() => Linking.openURL('https://notifee.app/')}>
@@ -157,29 +139,6 @@ const styles = StyleSheet.create
           textAlign:'center',
           fontSize:15,
           fontWeight:'600'
-      },
-      centeredView: {
-        flex: 1,
-        justifyContent: "center",
-        alignItems: "center",
-        marginTop: 0,
-        backgroundColor:'#00000099'
-
-      },
-      modalView: {
-        margin: 20,
-        backgroundColor: "white",
-        borderRadius: 20,
-        padding: 35,
-        alignItems: "center",
-        shadowColor: "#000",
-        shadowOffset: {
-          width: 0,
-          height: 2
-        },
-        shadowOpacity: 0.25,
-        shadowRadius: 4,
-        elevation: 5
       },
 })
 export default Help;
