@@ -6,6 +6,8 @@ import {
   TextInput,
   StyleSheet,
   ScrollView,
+  Modal,
+  Alert
 } from 'react-native';
 import notifee from '@notifee/react-native';
 import DropDownPicker from 'react-native-dropdown-picker';
@@ -13,10 +15,12 @@ import NotificationHandler from '../notification/notification';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import RNPickerSelect from 'react-native-picker-select';
 import { SketchPicker } from 'react-color';
+import { CromaColorPicker as ColorPicker } from "croma-color-picker";
 
 let notificationHandler = new NotificationHandler();
 
 const CreateLocalNotification = () => {
+  const [modalVisible, setModalVisible] = useState(false);
   const [values, setvalues] = useState({
     channelId: '',
     channelName: '',
@@ -168,6 +172,23 @@ const CreateLocalNotification = () => {
 
         <Text style={styles.topic}>Android Notification Setup</Text>
         <Text style={styles.inputText}>Color</Text>
+        <Button title="open" onPress={()=>{setModalVisible(true)}}/>
+        <Modal
+        animationType="slide"
+        transparent={true}
+        visible={modalVisible}
+        onRequestClose={() => {
+          Alert.alert("Modal has been closed.");
+          setModalVisible(!modalVisible);
+        }}
+      ><View style={styles.centeredView}>
+          <View style={styles.modalView}>
+          <ColorPicker
+          onChangeColor={color => {
+            setColor(color);
+          }}
+          style={[{ height: 350 }]}
+        /><Text>Hello</Text></View></View></Modal>
         <TextInput
           style={styles.input}
           value={values.color}
@@ -318,6 +339,29 @@ const pickerSelectStyles = StyleSheet.create({
     borderRadius: 8,
     color: 'black',
     paddingRight: 30, // to ensure the text is never behind the icon
+  },
+  centeredView: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    marginTop: 0,
+    backgroundColor:'#00000099'
+
+  },
+  modalView: {
+    margin: 20,
+    backgroundColor: "white",
+    borderRadius: 20,
+    padding: 35,
+    alignItems: "center",
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 5
   },
 });
 
