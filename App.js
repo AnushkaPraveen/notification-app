@@ -17,6 +17,7 @@ import CreateNotification from "./app/screens/createLocalNotification"
 import HandleNotification from './app/screens/handleNotification';
 import CreateProgressNotification from './app/screens/createProgressNotification';
 import Help from './app/screens/help';
+import Loading from './app/screens/loading';
 
 import SubHome from './app/screens/subHome';
 
@@ -26,7 +27,8 @@ const App= () => {
  
   return (
     <NavigationContainer independent={true}>
-      <Stack.Navigator initialRouteName="Home">
+      <Stack.Navigator initialRouteName="Loading">
+      <Stack.Screen name="Loading" options={{headerShown:false}} component={Loading}/>
         <Stack.Screen name="Home" options={{headerShown: false}} component={Home} />
         <Stack.Screen name="CreateNotification" options={{ title: 'Create/Update Notification' }} component={CreateNotification} />
         <Stack.Screen name="HandleNotification" options={{ title: 'Handle Notification' }} component={HandleNotification} />
