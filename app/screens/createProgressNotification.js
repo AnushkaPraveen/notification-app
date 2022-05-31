@@ -27,7 +27,7 @@ const CreateProgressNotification = () => {
     visibility: 0,
     time: null,
     ongoing:null,
-    progressSize:0,
+    progressSize:'',
     currentSize:'',
     indeterminate:null,
     color:''
@@ -129,6 +129,7 @@ const CreateProgressNotification = () => {
           <TextInput
             style={styles.input}
             value={values.currentSize}
+            keyboardType='numeric'
             onChangeText={text => handleChange('currentSize', text)}
           />
           <Text style={styles.inputText}>Color</Text>
