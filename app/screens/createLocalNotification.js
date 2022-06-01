@@ -17,6 +17,7 @@ import {SafeAreaView} from 'react-native-safe-area-context';
 import RNPickerSelect from 'react-native-picker-select';
 import { SketchPicker } from 'react-color';
 import { CromaColorPicker as ColorPicker } from "croma-color-picker";
+import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 
 let notificationHandler = new NotificationHandler();
 
@@ -115,30 +116,15 @@ const CreateLocalNotification = () => {
                 {label: 'On', value: true},
                 {label: 'Off', value: false},
               ]}
-              style={{
-                ...pickerSelectStyles,
-                iconContainer: {
-                  top: 20,
-                  right: 10,
-                  borderWidth: 1,
-                  borderColor: 'red',
-                },
-                placeholder: {
-                  color: 'purple',
-                  fontSize: 12,
-                  fontWeight: 'bold',
-                },
-                inputAndroid: {
-                  fontSize: 16,
-                  paddingHorizontal: 10,
-                  paddingVertical: 8,
-                  borderWidth: 0.5,
-                  borderColor: 'purple',
-                  borderRadius: 8,
-                  color: 'black',
-                  paddingRight: 30, // to ensure the text is never behind the icon
-                },
-              }}
+              style={pickerSelectStyles}
+              useNativeAndroidPickerStyle={false} 
+              Icon={() => {
+              return  <FontAwesome5
+                name='angle-down'
+                size={24}
+                color="#000"
+              />;
+            }}
             />
           </View>
         </View>
@@ -236,6 +222,15 @@ const CreateLocalNotification = () => {
               {label: 'Default', value: 3},
               {label: 'High', value: 4},
             ]}
+            style={pickerSelectStyles}
+              useNativeAndroidPickerStyle={false} 
+              Icon={() => {
+              return  <FontAwesome5
+                name='angle-down'
+                size={24}
+                color="#000"
+              />;
+            }}
           />
         </View>
         <View>
@@ -247,6 +242,15 @@ const CreateLocalNotification = () => {
               {label: 'Public', value: 1},
               {label: 'Secret', value: -1},
             ]}
+            style={pickerSelectStyles}
+              useNativeAndroidPickerStyle={false} 
+              Icon={() => {
+              return  <FontAwesome5
+                name='angle-down'
+                size={24}
+                color="#000"
+              />;
+            }}
           />
         </View>
         <View>
@@ -257,6 +261,15 @@ const CreateLocalNotification = () => {
               {label: 'On', value: true},
               {label: 'Off', value: false},
             ]}
+            style={pickerSelectStyles}
+              useNativeAndroidPickerStyle={false} 
+              Icon={() => {
+              return  <FontAwesome5
+                name='angle-down'
+                size={24}
+                color="#000"
+              />;
+            }}
           />
         </View>
         <View>
@@ -267,6 +280,15 @@ const CreateLocalNotification = () => {
               {label: 'On', value: true},
               {label: 'Off', value: false},
             ]}
+            style={pickerSelectStyles}
+              useNativeAndroidPickerStyle={false} 
+              Icon={() => {
+              return  <FontAwesome5
+                name='angle-down'
+                size={24}
+                color="#000"
+              />;
+            }}
           />
         </View>
         <View>
@@ -277,6 +299,15 @@ const CreateLocalNotification = () => {
               {label: 'On', value: true},
               {label: 'Off', value: false},
             ]}
+            style={pickerSelectStyles}
+              useNativeAndroidPickerStyle={false} 
+              Icon={() => {
+              return  <FontAwesome5
+                name='angle-down'
+                size={24}
+                color="#000"
+              />;
+            }}
           />
         </View>
         <View>
@@ -287,6 +318,15 @@ const CreateLocalNotification = () => {
               {label: 'On', value: true},
               {label: 'Off', value: false},
             ]}
+            style={pickerSelectStyles}
+              useNativeAndroidPickerStyle={false} 
+              Icon={() => {
+              return  <FontAwesome5
+                name='angle-down'
+                size={24}
+                color="#000"
+              />;
+            }}
           />
         </View>
 
@@ -420,11 +460,37 @@ const pickerSelectStyles = StyleSheet.create({
     fontSize: 16,
     paddingHorizontal: 10,
     paddingVertical: 8,
-    borderWidth: 0.5,
-    borderColor: 'purple',
+    borderWidth: 1,
+    borderColor: 'black',
     borderRadius: 8,
     color: 'black',
     paddingRight: 30, // to ensure the text is never behind the icon
+    marginLeft:20,
+    marginRight:20
+  },
+  placeholder: {
+    color: 'black',
+    fontSize: 15,
+    fontWeight: 'bold',
+  },
+  /* icon: {
+		position: 'absolute',
+		backgroundColor: 'red',
+		borderTopWidth: 5,
+		borderTopColor: '#00000099',
+		borderRightWidth: 5,
+		borderRightColor: 'transparent',
+		borderLeftWidth: 5,
+		borderLeftColor: 'transparent',
+		width: 0,
+		height: 0,
+		top: 20,
+		right: 0,
+	}, */
+  iconContainer: {
+    placeholderColor: 'red',
+    top: 10,
+    right: 30
   },
   
 });
