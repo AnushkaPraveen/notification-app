@@ -7,7 +7,8 @@ import {
   StyleSheet,
   ScrollView,
   Modal,
-  Alert
+  Alert,
+  TouchableOpacity
 } from 'react-native';
 import notifee from '@notifee/react-native';
 import DropDownPicker from 'react-native-dropdown-picker';
@@ -172,7 +173,7 @@ const CreateLocalNotification = () => {
 
         <Text style={styles.topic}>Android Notification Setup</Text>
         <Text style={styles.inputText}>Color</Text>
-        <Button title="open" onPress={()=>{setModalVisible(true)}}/>
+        
         <Modal
         animationType="slide"
         transparent={true}
@@ -183,17 +184,35 @@ const CreateLocalNotification = () => {
         }}
       ><View style={styles.centeredView}>
           <View style={styles.modalView}>
+          <Text style={styles.inputText}>Select a Color</Text>
           <ColorPicker
           onChangeColor={color => {
-            setColor(color);
+            handleChange('color', color)
           }}
-          style={[{ height: 350 }]}
-        /><Text>Hello</Text></View></View></Modal>
+          style={[{ height: 350 ,marginBottom:10}]}
+        /><TouchableOpacity style={styles.ButtonContainer} onPress={()=>{setModalVisible(false)}}>
+          <Text style={styles.ButtonText}>select</Text>
+        </TouchableOpacity></View></View></Modal>
         <TextInput
-          style={styles.input}
+          style={{marginRight: 20,
+    marginLeft: 20,
+    marginBottom: 15,
+    height: 50,
+    borderColor: '#000000',
+    borderWidth: 1,
+    borderRadius: 8,
+    paddingLeft: 15,
+    fontSize:20,
+    backgroundColor:values.color,
+    color:'white'}}
           value={values.color}
+          editable={false}
           onChangeText={text => handleChange('color', text)}
         />
+       
+        <TouchableOpacity style={styles.ScreenButtonContainer} onPress={()=>{setModalVisible(true)}}>
+          <Text style={styles.ScreenButtonText}>Select a Color</Text>
+        </TouchableOpacity>
         <Text style={styles.inputText}>Notification Large Icon</Text>
         <TextInput
           style={styles.input}
@@ -280,10 +299,9 @@ const CreateLocalNotification = () => {
           onChangeText={text => handleChange('color', text)}
         />
         </View>
-
-        <View style={styles.buttonArea}>
-          <Button title="Submit" onPress={setNotifcation} />
-        </View>
+        <TouchableOpacity style={styles.ScreenButtonContainer} onPress={setNotifcation}>
+          <Text style={styles.ScreenButtonText}>Create</Text>
+        </TouchableOpacity>
       </ScrollView>
     </SafeAreaView>
   );
@@ -316,7 +334,75 @@ const styles = StyleSheet.create({
     marginLeft: 15,
     fontWeight: 'bold',
     marginTop: 10,
+  },centeredView: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    marginTop: 0,
+    backgroundColor:'#00000099'
+
   },
+  modalView: {
+    margin: 20,
+    backgroundColor: "white",
+    borderRadius: 20,
+    padding: 35,
+    alignItems: "center",
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 5
+  },
+  ButtonContainer: {
+    elevation: 8,
+    backgroundColor: "#553C9A",
+    borderRadius: 10,
+    paddingVertical: 10,
+    paddingHorizontal: 12,
+    marginTop: 5,
+    marginLeft: 50,
+    marginRight: 50,
+    marginBottom: 10,
+    
+  },
+  ScreenButtonContainer: {
+    elevation: 8,
+    backgroundColor: "#553C9A",
+    borderRadius: 10,
+    paddingVertical: 5,
+    paddingHorizontal: 5,
+    marginTop: 0,
+    marginLeft: 150,
+    marginRight: 150,
+    marginBottom: 10,
+    
+  },
+  ButtonText: {
+    fontSize: 18,
+    color: "#fff",
+    fontWeight: "bold",
+    alignSelf: "center",
+    textTransform: "uppercase",
+    textAlign: 'center',
+    padding:5
+  },
+  ScreenButtonText: {
+    fontSize: 12,
+    color: "#fff",
+    fontWeight: "bold",
+    alignSelf: "center",
+    textTransform: "uppercase",
+    textAlign: 'center',
+    padding:5
+  },
+  colorView:{
+    padding:10,
+    backgroundColor:'black'
+  }
 });
 
 const pickerSelectStyles = StyleSheet.create({
@@ -340,29 +426,7 @@ const pickerSelectStyles = StyleSheet.create({
     color: 'black',
     paddingRight: 30, // to ensure the text is never behind the icon
   },
-  centeredView: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    marginTop: 0,
-    backgroundColor:'#00000099'
-
-  },
-  modalView: {
-    margin: 20,
-    backgroundColor: "white",
-    borderRadius: 20,
-    padding: 35,
-    alignItems: "center",
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 0,
-      height: 2
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 4,
-    elevation: 5
-  },
+  
 });
 
 export default CreateLocalNotification;
