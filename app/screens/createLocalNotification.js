@@ -90,7 +90,7 @@ const CreateLocalNotification = () => {
 
   return (
     <SafeAreaView>
-      <ScrollView style={{backgroundColor:'white'}}>
+      <ScrollView style={{backgroundColor:'#fff'}}>
       
         <View>
         
@@ -140,6 +140,8 @@ const CreateLocalNotification = () => {
           <Text style={styles.inputText}>Title</Text>
           <TextInput
             style={styles.input}
+            multiline={true}
+        numberOfLines={4}
             value={values.title}
             onChangeText={text => handleChange('title', text)}
           />
@@ -151,8 +153,10 @@ const CreateLocalNotification = () => {
           />
           <Text style={styles.inputText}>Notification Body</Text>
           <TextInput
-            style={styles.input}
+            style={[styles.input, styles.specialInput]}
             value={values.body}
+            numberOfLines={5}
+            multiline={true}
             onChangeText={text => handleChange('body', text)}
           />
         </View>
@@ -362,6 +366,10 @@ const styles = StyleSheet.create({
     marginLeft: 20,
     color: '#000000',
     
+  },
+  specialInput:{
+    height:100,
+    paddingRight: 15,
   },
   buttonArea: {
     flex: 1,

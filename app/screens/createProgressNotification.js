@@ -73,7 +73,7 @@ const CreateProgressNotification = () => {
 
   return (
     <SafeAreaView>
-      <ScrollView style={{backgroundColor:'white'}}>
+      <ScrollView style={{backgroundColor:'#fff'}}>
         <View>
           <Text style={styles.topic}>Android Channel Setup</Text>
           <Text style={styles.inputText}>Channel Id</Text>
@@ -121,12 +121,16 @@ const CreateProgressNotification = () => {
           <TextInput
             style={styles.input}
             value={values.title}
+            numberOfLines={5}
+            multiline={true}
             onChangeText={text => handleChange('title', text)}
           />
           <Text style={styles.inputText}>Notification Body</Text>
           <TextInput
-            style={styles.input}
+             style={[styles.input, styles.specialInput]}
             value={values.body}
+            numberOfLines={5}
+            multiline={true}
             onChangeText={text => handleChange('body', text)}
           />
         </View>
@@ -301,11 +305,15 @@ const styles = StyleSheet.create({
     marginRight: 20,
     marginLeft: 20,
     marginBottom: 15,
-    height: 40,
+    height: 50,
     borderColor: '#000000',
     borderWidth: 1,
     borderRadius: 8,
     paddingLeft: 15,
+  },
+  specialInput:{
+    height:100,
+    paddingRight: 15,
   },
   inputText: {
     marginLeft: 20,
