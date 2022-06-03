@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React,{useEffect} from 'react';
 
 import {
   SafeAreaView,
@@ -17,13 +17,25 @@ import CreateNotification from "./app/screens/createLocalNotification"
 import HandleNotification from './app/screens/handleNotification';
 import CreateProgressNotification from './app/screens/createProgressNotification';
 import Help from './app/screens/help';
-
 import SubHome from './app/screens/subHome';
+import OneSignal from 'react-native-onesignal';
 
 const Stack = createNativeStackNavigator();
 
 const App= () => {
  
+  useEffect(()=>{
+    //OneSignal Init Code
+    OneSignal.setLogLevel(6, 0);
+    OneSignal.setAppId("d93e3648-2fd4-48eb-be13-955bc5f784ef");
+    //END OneSignal Init Code
+    
+    
+    //Method for handling notifications opened
+    OneSignal.setNotificationOpenedHandler(notification => {
+      console.log("OneSignal: notification opened:", notification);
+    });
+      },[])
   return (
     <NavigationContainer independent={true}>
       <Stack.Navigator initialRouteName="Home">
