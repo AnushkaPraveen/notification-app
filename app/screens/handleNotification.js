@@ -6,7 +6,8 @@ import {
   TextInput,
   StyleSheet,
   ScrollView,
-  TouchableOpacity
+  TouchableOpacity,
+  Alert
 } from 'react-native';
 import NotificationHandler from '../notification/notification';
 
@@ -30,8 +31,8 @@ const HandleNotification = () => {
         });
       };
       const getData=()=>{
-        settriggerNotification(notificationHandler.getTriggerNotification)
-        console.log(triggerNotifications);
+       notificationHandler.getTriggerNotification()
+       
       }
     
   return (
@@ -61,7 +62,8 @@ const HandleNotification = () => {
       <View>
         <Text style={styles.topic}>Trigger Notifications</Text>
         <View>
-        <TouchableOpacity style={styles.ButtonContainer}>
+        <TouchableOpacity style={styles.ButtonContainer} onPress={
+        getData}>
           <Text style={styles.ButtonText}>Delete Channel</Text>
         </TouchableOpacity>
         
