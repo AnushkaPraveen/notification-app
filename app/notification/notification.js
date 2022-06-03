@@ -564,7 +564,7 @@ export default class NotificationHandler {
         notifee.decrementBadgeCount(count)
     }
     
-    getTriggerNotification = () => {
-        notifee.getTriggerNotificationIds().then(function(ids){return "Hello"});
+    getTriggerNotification =async() => {
+       await notifee.getTriggerNotificationIds().then((ids) => {return ids})
     }
 }
