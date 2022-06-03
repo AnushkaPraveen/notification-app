@@ -30,7 +30,7 @@ const SheduleNotification = () => {
     notificationId: '',
     title: '',
     body: '',
-    color: '',
+    color: '#495371',
     icon: null,
     image: null,
     importance: 0,
