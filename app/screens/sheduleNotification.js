@@ -108,12 +108,14 @@ const SheduleNotification = () => {
           <TextInput
             style={styles.input}
             value={values.channelId}
+            placeholder="e.g - channel123"
             onChangeText={text => handleChange('channelId', text)}
           />
           <Text style={styles.inputText}>Channel Name</Text>
           <TextInput
             style={styles.input}
             value={values.channelName}
+            placeholder="e.g - Channel 123"
             onChangeText={text => handleChange('channelName', text)}
           />
           <View>
@@ -144,6 +146,7 @@ const SheduleNotification = () => {
           <TextInput
             style={styles.input}
             value={values.notificationId}
+            placeholder="e.g - 123"
             onChangeText={text => handleChange('notificationId', text)}
           />
           <Text style={styles.inputText}>Title</Text>
@@ -152,12 +155,14 @@ const SheduleNotification = () => {
             value={values.title}
             numberOfLines={5}
             multiline={true}
+            placeholder="e.g - Notification Title"
             onChangeText={text => handleChange('title', text)}
           />
           <Text style={styles.inputText}>Subtitle</Text>
           <TextInput
             style={styles.input}
             value={values.subtitle}
+            placeholder="e.g - Notification Subtitle"
             onChangeText={text => handleChange('subtitle', text)}
           />
           <Text style={styles.inputText}>Notification Body</Text>
@@ -166,6 +171,7 @@ const SheduleNotification = () => {
             numberOfLines={5}
             multiline={true}
             value={values.body}
+            placeholder="Main body content of the shedule notification"
             onChangeText={text => handleChange('body', text)}
           />
         </View>
@@ -265,6 +271,7 @@ const SheduleNotification = () => {
         <TextInput
           style={styles.input}
           value={values.image}
+          placeholder="URL"
           onChangeText={text => handleChange('image', text)}
         />
         <View>

@@ -29,7 +29,7 @@ const CreateLocalNotification = () => {
     notificationId: '',
     title: '',
     body: '',
-    color: '',
+    color: '#495371',
     icon: null,
     image: null,
     importance: 0,
@@ -39,7 +39,13 @@ const CreateLocalNotification = () => {
     time: null,
     ongoing:null,
     asForegroundService:null,
-    colorized:null
+    colorized:null,
+    actionIdOne:'',
+    actionTitleOne:'',
+    actionIdTwo:undefined,
+    actionTitleTwo:undefined,
+    actionIdThree:undefined,
+    actionTitleThree:undefined
   });
 
   const onDisplayNotification = async () => {
@@ -83,7 +89,22 @@ const CreateLocalNotification = () => {
       ongoing:values.ongoing,
       foregroundService:values.asForegroundService,
       colorized:values.colorized,
-      image:values.image
+      image:values.image,
+      
+      AndroidActions:[{
+        title:values.actionTitleOne,
+        pressAction:{
+          id:values.actionIdOne
+        }
+      }/* ,{
+      title:values.actionTitleTwo,
+      pressAction:{
+        id:values.actionIdTwo
+      }},{
+      title:values.actionTitleThree,
+      pressAction:{
+        id:values.actionIdThree
+      }} */]
     };
     notificationHandler.getNotification(payload);
   };
@@ -99,12 +120,14 @@ const CreateLocalNotification = () => {
           <TextInput
             style={styles.input}
             value={values.channelId}
+            placeholder="e.g - channel123"
             onChangeText={text => handleChange('channelId', text)}
           />
           <Text style={styles.inputText}>Channel Name</Text>
           <TextInput
             style={styles.input}
             value={values.channelName}
+            placeholder="e.g - Channel 123"
             onChangeText={text => handleChange('channelName', text)}
           />
           <View>
@@ -135,6 +158,7 @@ const CreateLocalNotification = () => {
           <TextInput
             style={styles.input}
             value={values.notificationId}
+            placeholder="e.g - 123"
             onChangeText={text => handleChange('notificationId', text)}
           />
           <Text style={styles.inputText}>Title</Text>
@@ -143,12 +167,14 @@ const CreateLocalNotification = () => {
             multiline={true}
         numberOfLines={4}
             value={values.title}
+            placeholder="e.g - Notification Title"
             onChangeText={text => handleChange('title', text)}
           />
           <Text style={styles.inputText}>Subtitle</Text>
           <TextInput
             style={styles.input}
             value={values.subtitle}
+            placeholder="e.g - Notification Subtitle"
             onChangeText={text => handleChange('subtitle', text)}
           />
           <Text style={styles.inputText}>Notification Body</Text>
@@ -157,6 +183,7 @@ const CreateLocalNotification = () => {
             value={values.body}
             numberOfLines={5}
             multiline={true}
+            placeholder="Main body content of the notification"
             onChangeText={text => handleChange('body', text)}
           />
         </View>
@@ -213,6 +240,7 @@ const CreateLocalNotification = () => {
         <TextInput
           style={styles.input}
           value={values.image}
+          placeholder="URL"
           onChangeText={text => handleChange('image', text)}
         />
         <View>
@@ -333,6 +361,26 @@ const CreateLocalNotification = () => {
             }}
           />
         </View>
+        <Text style={styles.inputText}>Actions</Text>
+        <View style={styles.actionsView}>
+        <View style={styles.item}>
+<Text>Title</Text>
+<TextInput
+          style={styles.actionInput}
+          value={values.actionTitleOne}
+          onChangeText={text => handleChange('actionTitleOne', text)}
+        />
+        </View>
+        <View style={styles.item}>
+<Text>Id</Text>
+<TextInput
+          style={styles.actionInput}
+          value={values.actionIdOne}
+          onChangeText={text => handleChange('actionIdOne', text)}
+        />
+        </View>
+
+        </View>
 
         <View>
         <Text style={styles.topic}>iOS Notification Setup</Text>
@@ -370,6 +418,18 @@ const styles = StyleSheet.create({
   specialInput:{
     height:100,
     paddingRight: 15,
+  },
+  actionInput:{
+   
+      marginRight: 20,
+      marginLeft: 0,
+      marginBottom: 15,
+      height: 50,
+      borderColor: '#000000',
+      borderWidth: 1,
+      borderRadius: 8,
+      paddingLeft: 15,
+    
   },
   buttonArea: {
     flex: 1,
@@ -450,6 +510,16 @@ const styles = StyleSheet.create({
   colorView:{
     padding:10,
     backgroundColor:'black'
+  },actionsView:{
+    flex: 1,
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    marginLeft: 20,
+    /* alignItems: 'flex-start' */
+  },
+  item: {
+    width: '50%', // is 50% of container width
+    color:'red'
   }
 });
 
