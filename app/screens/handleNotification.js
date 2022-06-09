@@ -19,7 +19,10 @@ const HandleNotification = () => {
 
     const [values, setvalues] = useState({
      notificationId:'',
-     channelId:''
+     channelId:'',
+     badgeCount:0,
+     increamentBadgeCount:0,
+     decreamentBadgeCount:0
       });
     const[triggerNotifications,settriggerNotification]=useState([])
 
@@ -30,8 +33,10 @@ const HandleNotification = () => {
           [state]: value,
         });
       };
-      const getData=()=>{
-       notificationHandler.getTriggerNotification()
+      const getData=async()=>{
+        const returnedValue = await notificationHandler.getTriggerNotification()
+        alert(JSON.stringify(returnedValue))
+        console.log(JSON.stringify(returnedValue));
        
       }
     
@@ -40,7 +45,7 @@ const HandleNotification = () => {
       <View>
         <Text style={styles.topic}>Common Functions</Text>
         <Text style={styles.inputText}>Cancel Notification</Text>
-        <TextInput style={styles.input} onChangeText={text => handleChange('notificationId', text)}/>
+        <TextInput style={styles.input} placeholder="e.g - 123" onChangeText={text => handleChange('notificationId', text)}/>
         <View>
         <TouchableOpacity style={styles.ButtonContainer} onPress={()=>{notificationHandler.cancelNotification(values.notificationId)}}>
           <Text style={styles.ButtonText}>Cancel Notification</Text>
@@ -51,9 +56,9 @@ const HandleNotification = () => {
       <View>
         <Text style={styles.topic}>Android Functions</Text>
         <Text style={styles.inputText}>Delete Channel</Text>
-        <TextInput style={styles.input} onChangeText={text => handleChange('channelId', text)}/>
+        <TextInput style={styles.input} placeholder="e.g - channel123" onChangeText={text => handleChange('channelId', text)}/>
         <View>
-        <TouchableOpacity style={styles.ButtonContainer} onPress={()=>{notificationHandler.deleteChannel(values.channelId)}}>
+        <TouchableOpacity style={styles.ButtonContainer} onPress={notificationHandler.deleteChannel(values.channelId)}>
           <Text style={styles.ButtonText}>Delete Channel</Text>
         </TouchableOpacity>
           
@@ -67,6 +72,33 @@ const HandleNotification = () => {
           <Text style={styles.ButtonText}>Delete Channel</Text>
         </TouchableOpacity>
         
+        </View>
+      </View>
+      <View>
+        <Text style={styles.topic}>iOS Badge</Text>
+        <View>
+        <Text style={styles.inputText}>Set Badge Count</Text>
+        <TextInput style={styles.input} placeholder="e.g - 123"
+        keyboardType='numeric' onChangeText={text => handleChange('badgeCount', text)}/>
+         <TouchableOpacity style={styles.ButtonContainer} onPress={notificationHandler.setBadgeCount(values.badgeCount)}>
+          <Text style={styles.ButtonText}>Set Badge Count</Text>
+        </TouchableOpacity> 
+        </View>
+        <View>
+        <Text style={styles.inputText}>Increment Badge Count</Text>
+        <TextInput style={styles.input} placeholder="e.g - 123"
+        keyboardType='numeric' onChangeText={text => handleChange('increamentBadgeCount', text)}/>
+         <TouchableOpacity style={styles.ButtonContainer} onPress={notificationHandler.incrementBadgeCount(values.badgeCount)}>
+          <Text style={styles.ButtonText}>Increment Count</Text>
+        </TouchableOpacity> 
+        </View>
+        <View>
+        <Text style={styles.inputText}>Decrement Badge Count</Text>
+        <TextInput style={styles.input} placeholder="e.g - 123"
+        keyboardType='numeric' onChangeText={text => handleChange('decreamentBadgeCount', text)}/>
+         <TouchableOpacity style={styles.ButtonContainer} onPress={notificationHandler.decrementBadgeCount(values.badgeCount)}>
+          <Text style={styles.ButtonText}>Decrement Badge Count</Text>
+        </TouchableOpacity> 
         </View>
       </View>
     </ScrollView>
