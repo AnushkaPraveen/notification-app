@@ -25,6 +25,17 @@ export default class NotificationHandler {
         }
     }
 
+    setCategories = async(payload)=>{
+        await notifee.setNotificationCategories([
+            {
+                id: payload.IosActionId || undefined,
+            actions: payload.IosActions || []
+
+            }
+
+        ])
+    }
+
     getNotification = async(payload) => {
         console.log('this is payload', payload.image);
         this.getIOSPermission()
@@ -553,6 +564,7 @@ export default class NotificationHandler {
         notifee.getBadgeCount().then(count => console.log('Current badge count: ', count));
     }
     setBadgeCount = (count) => {
+        console.log(count);
         notifee.setBadgeCount(count).then(() => console.log('Badge count set!'));
     }
 
@@ -565,6 +577,18 @@ export default class NotificationHandler {
     }
     
     getTriggerNotification =async() => {
-       await notifee.getTriggerNotificationIds().then((ids) => {return ids})
-    }
+       
+            let idValues;
+            await notifee.getTriggerNotificationIds()
+                .then((ids) => {
+                    console.log(`🚀🚀 ===> ` + JSON.stringify(ids))
+                    return ids
+                    /* idValues = ids; */
+                });
+    
+            /* return idValues; */
+        }
+    
+    
+    
 }

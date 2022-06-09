@@ -22,6 +22,9 @@ export const actionPress = (actionId) => {
         case 'action3':
             console.log("This is action3");
             break;
+        case 'default':
+            console.log("This is default");
+            break;
         default:
             console.log("This is Action Press");
             break;
