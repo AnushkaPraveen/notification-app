@@ -69,7 +69,7 @@ const HandleNotification = () => {
         <View>
         <TouchableOpacity style={styles.ButtonContainer} onPress={
         getData}>
-          <Text style={styles.ButtonText}>Delete Channel</Text>
+          <Text style={styles.ButtonText}>Get Trigger Notification Details</Text>
         </TouchableOpacity>
         
         </View>
@@ -100,6 +100,16 @@ const HandleNotification = () => {
           <Text style={styles.ButtonText}>Decrement Badge Count</Text>
         </TouchableOpacity> 
         </View>
+        <View>
+        <Text style={styles.inputText}>Get Badge Count</Text>
+        <View>
+        <TouchableOpacity style={styles.ButtonContainer} onPress={
+        getData}>
+          <Text style={styles.ButtonText}>Get Badge Count</Text>
+        </TouchableOpacity>
+        
+        </View>
+      </View>
       </View>
     </ScrollView>
   );
