@@ -21,8 +21,8 @@ const HandleNotification = () => {
      notificationId:'',
      channelId:'',
      badgeCount:0,
-     increamentBadgeCount:0,
-     decreamentBadgeCount:0
+     increamentBadgeCount:1,
+     decreamentBadgeCount:1
       });
     const[triggerNotifications,settriggerNotification]=useState([])
 
@@ -40,6 +40,18 @@ const HandleNotification = () => {
        
       }
     
+      const setBadgeCount =() => {
+        notificationHandler.setBadgeCount(parseInt(values.badgeCount))
+      }
+
+      const Increment = () =>{
+       notificationHandler.incrementBadgeCount(parseInt(values.increamentBadgeCount))
+      }
+
+      const Decrement = () =>{
+       notificationHandler.decrementBadgeCount(parseInt(values.decreamentBadgeCount))
+      }
+
   return (
     <ScrollView style={{backgroundColor:'white'}}>
       <View>
@@ -80,7 +92,7 @@ const HandleNotification = () => {
         <Text style={styles.inputText}>Set Badge Count</Text>
         <TextInput style={styles.input} placeholder="e.g - 123"
         keyboardType='numeric' onChangeText={text => handleChange('badgeCount', text)}/>
-         <TouchableOpacity style={styles.ButtonContainer} onPress={notificationHandler.setBadgeCount(values.badgeCount)}>
+         <TouchableOpacity style={styles.ButtonContainer} onPress={setBadgeCount}>
           <Text style={styles.ButtonText}>Set Badge Count</Text>
         </TouchableOpacity> 
         </View>
@@ -88,7 +100,7 @@ const HandleNotification = () => {
         <Text style={styles.inputText}>Increment Badge Count</Text>
         <TextInput style={styles.input} placeholder="e.g - 123"
         keyboardType='numeric' onChangeText={text => handleChange('increamentBadgeCount', text)}/>
-         <TouchableOpacity style={styles.ButtonContainer} onPress={notificationHandler.incrementBadgeCount(values.badgeCount)}>
+         <TouchableOpacity style={styles.ButtonContainer} onPress={Increment}>
           <Text style={styles.ButtonText}>Increment Count</Text>
         </TouchableOpacity> 
         </View>
@@ -96,7 +108,7 @@ const HandleNotification = () => {
         <Text style={styles.inputText}>Decrement Badge Count</Text>
         <TextInput style={styles.input} placeholder="e.g - 123"
         keyboardType='numeric' onChangeText={text => handleChange('decreamentBadgeCount', text)}/>
-         <TouchableOpacity style={styles.ButtonContainer} onPress={notificationHandler.decrementBadgeCount(values.badgeCount)}>
+         <TouchableOpacity style={styles.ButtonContainer} onPress={Decrement}>
           <Text style={styles.ButtonText}>Decrement Badge Count</Text>
         </TouchableOpacity> 
         </View>
