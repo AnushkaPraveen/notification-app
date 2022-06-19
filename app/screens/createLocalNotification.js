@@ -23,6 +23,7 @@ let notificationHandler = new NotificationHandler();
 
 const CreateLocalNotification = () => {
   const [modalVisible, setModalVisible] = useState(false);
+  const [actionCount,setActionCount]=useState(1)
   const [values, setvalues] = useState({
     channelId: '',
     channelName: '',
@@ -45,7 +46,19 @@ const CreateLocalNotification = () => {
     actionIdTwo:undefined,
     actionTitleTwo:undefined,
     actionIdThree:undefined,
-    actionTitleThree:undefined
+    actionTitleThree:undefined,
+    actions:[],
+    iosActions:[],
+    actionValues:[{
+      title:'actionTitleOne',
+      id:'actionIdOne'
+    },{
+      title:'actionTitleTwo',
+      id:'actionIdTwo'
+    },{
+      title:'actionTitleThree',
+      id:'actionIdThree'
+    }]
   });
 
   const onDisplayNotification = async () => {
@@ -74,6 +87,29 @@ const CreateLocalNotification = () => {
   };
 
   const setNotifcation = () => {
+    if(values.actionIdOne && values.actionTitleOne){
+      values.actions.push({title:values.actionTitleOne,
+      pressAction:{
+        id:values.actionIdOne 
+      }})
+      values.iosActions.push({
+        id:values.actionIdOne ,
+        title:values.actionTitleOne,
+      })
+    }
+    if(values.actionIdTwo && values.actionTitleTwo){
+      values.actions.push({title:values.actionTitleTwo,
+      pressAction:{
+        id:values.actionIdTwo 
+      }})
+    }
+    if(values.actionIdThree && values.actionTitleThree){
+      values.actions.push({title:values.actionTitleThree ,
+      pressAction:{
+        id:values.actionIdThree  
+      }})
+    }
+    
     const payload = {
       channelId: values.channelId,
       name: values.channelName,
@@ -89,25 +125,25 @@ const CreateLocalNotification = () => {
       ongoing:values.ongoing,
       foregroundService:values.asForegroundService,
       colorized:values.colorized,
-      image:values.image,
-      
-      AndroidActions:[{
-        title:values.actionTitleOne,
-        pressAction:{
-          id:values.actionIdOne
-        }
-      }/* ,{
-      title:values.actionTitleTwo,
-      pressAction:{
-        id:values.actionIdTwo
-      }},{
-      title:values.actionTitleThree,
-      pressAction:{
-        id:values.actionIdThree
-      }} */]
+      image:values.image, 
+      AndroidActions:values.actions,
+      IosActions:values.iosActions
     };
     notificationHandler.getNotification(payload);
   };
+
+  const data = [
+
+    { id: 1, name: "John Doe" },
+
+    { id: 2, name: "Victor Wayne" },
+
+    { id: 3, name: "Jane Doe" },
+
+  ];
+const increment=()=>{
+setActionCount(actionCount=>actionCount+1)
+}
 
   return (
     <SafeAreaView>
@@ -165,7 +201,7 @@ const CreateLocalNotification = () => {
           <TextInput
             style={styles.input}
             multiline={true}
-        numberOfLines={4}
+            numberOfLines={4}
             value={values.title}
             placeholder="e.g - Notification Title"
             onChangeText={text => handleChange('title', text)}
@@ -362,25 +398,38 @@ const CreateLocalNotification = () => {
           />
         </View>
         <Text style={styles.inputText}>Actions</Text>
-        <View style={styles.actionsView}>
+        
+        
+        {values.actionValues.slice(0,actionCount).map((item)=>(
+          <View key={item.id} style={styles.actionsView}>
         <View style={styles.item}>
-<Text>Title</Text>
-<TextInput
+          <Text>Title</Text>
+          <TextInput
           style={styles.actionInput}
-          value={values.actionTitleOne}
-          onChangeText={text => handleChange('actionTitleOne', text)}
+          //value={values.item.title}
+          onChangeText={text => handleChange(item.title, text)}
         />
-        </View>
-        <View style={styles.item}>
-<Text>Id</Text>
-<TextInput
+          </View>
+          <View style={styles.item}>
+          <Text>Id</Text>
+          <TextInput
           style={styles.actionInput}
-          value={values.actionIdOne}
-          onChangeText={text => handleChange('actionIdOne', text)}
+          //value={values.item.id}
+          onChangeText={text => handleChange(item.id, text)}
         />
-        </View>
+          </View>
+          </View>
 
-        </View>
+))}
+{actionCount<3 ? <Text style={styles.addIcon}>
+<FontAwesome5 
+onPress={increment}
+                name='plus-circle'
+                size={40}
+                color="#553C9A"
+              />;
+
+</Text>:null }
 
         <View>
         <Text style={styles.topic}>iOS Notification Setup</Text>
@@ -520,7 +569,12 @@ const styles = StyleSheet.create({
   item: {
     width: '50%', // is 50% of container width
     color:'red'
+  },
+  addIcon:{
+    justifyContent:'center',
+    alignSelf:'center'
   }
+  
 });
 
 const pickerSelectStyles = StyleSheet.create({
