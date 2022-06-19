@@ -37,7 +37,7 @@ export default class NotificationHandler {
     }
 
     getNotification = async(payload) => {
-        console.log('this is payload', payload.image);
+        console.log('this is payload', payload.AndroidActions);
         this.getIOSPermission()
 
         //notifee foreground event action handle (swicth)
@@ -103,18 +103,60 @@ export default class NotificationHandler {
 
         }, ])
         try {
+            const x=({id: payload.notificationId || 'default',
+            title: payload.title || 'default',
+            subtitle: payload.subtitle || '',
+            body: payload.body || undefined,
+            android: {
+                channelId,
+                largeIcon: payload.Icon || 'ic_launcher',
+                smallIcon: 'ic_launcher', // optional, defaults to 'ic_launcher'.
+                /* payload.body && ...({style: {type:AndroidStyle.BIGTEXT, text:  payload.body}}), */
+               /*  style: payload.body && {type:AndroidStyle.BIGTEXT, text:  payload.body}, */
+                /* style:{ type:AndroidStyle.BIGTEXT, text:  payload.body }, */
+               /*  style: { type: AndroidStyle.BIGPICTURE, picture: payload.image }, */
+                /* style: payload.image || undefined, */
+                showTimestamp: payload.time || false,
+                importance: payload.importance || 3,
+                color: payload.color || '#495371',
+                visibility: payload.visibility || 0,
+                ongoing: payload.ongoing || false,
+                asForegroundService: payload.foregroundService || false,
+                colorized: payload.colorized || false,
+                pressAction: {
+                    id: 'default',
+                },
+                actions: payload.AndroidActions || [],
+
+            },
+            ios: {
+                categoryId: payload.IosActionId || 'default',
+                sound: 'default',
+                attachments: payload.IosImage || []
+
+            },
+            foregroundPresentationOptions: {
+                alert: true,
+                badge: true,
+                sound: true,
+            },})
+            
+            if(payload.body)x.android.style={type:AndroidStyle.BIGTEXT, text: payload.body}
             await notifee.displayNotification({
-                id: payload.notificationId || 'default',
+                ...x
+                /* id: payload.notificationId || 'default',
                 title: payload.title || 'default',
                 subtitle: payload.subtitle || '',
-                body: payload.body,
+                body: payload.body || undefined,
                 android: {
                     channelId,
                     largeIcon: payload.Icon || 'ic_launcher',
                     smallIcon: 'ic_launcher', // optional, defaults to 'ic_launcher'.
-                    style: { type: AndroidStyle.BIGTEXT, text: payload.body },
+                    /* payload.body && ...({style: {type:AndroidStyle.BIGTEXT, text:  payload.body}}), */
+                   /*  style: payload.body && {type:AndroidStyle.BIGTEXT, text:  payload.body}, */
+                    /* style:{ type:AndroidStyle.BIGTEXT, text:  payload.body }, */
                    /*  style: { type: AndroidStyle.BIGPICTURE, picture: payload.image }, */
-                    /* style: payload.image || undefined, */
+                    /* style: payload.image || undefined, 
                     showTimestamp: payload.time || false,
                     importance: payload.importance || 3,
                     color: payload.color || '#495371',
@@ -138,7 +180,7 @@ export default class NotificationHandler {
                     alert: true,
                     badge: true,
                     sound: true,
-                },
+                }, */
 
             })
         } catch (e) {
@@ -232,7 +274,7 @@ export default class NotificationHandler {
                     channelId,
                     largeIcon: payload.Icon || 'ic_launcher',
                     smallIcon: 'ic_launcher', // optional, defaults to 'ic_launcher'.
-                    style: { type: AndroidStyle.BIGTEXT, text: payload.body },
+                    style: { type:payload.body? AndroidStyle.BIGTEXT:undefined, text: payload.body },
                     style: payload.image || undefined,
                     showTimestamp: payload.time || true,
                     importance: payload.importance || 3,
@@ -324,7 +366,7 @@ export default class NotificationHandler {
                     channelId,
                     largeIcon: payload.Icon || 'ic_launcher',
                     smallIcon: 'ic_launcher', // optional, defaults to 'ic_launcher'.
-                    style: { type: AndroidStyle.BIGTEXT, text: payload.body },
+                    style: { type:payload.body? AndroidStyle.BIGTEXT:undefined, text: payload.body },
                     style: payload.image || undefined,
                     showTimestamp: payload.time || true,
                     importance: payload.importance || 3,
@@ -406,7 +448,7 @@ export default class NotificationHandler {
                     channelId,
                     largeIcon: payload.Icon || 'ic_launcher',
                     smallIcon: 'ic_launcher', // optional, defaults to 'ic_launcher'.
-                    style: { type: AndroidStyle.BIGTEXT, text: payload.body },
+                    style: { type:payload.body? AndroidStyle.BIGTEXT:undefined, text: payload.body },
                     style: payload.image || undefined,
                     showTimestamp: payload.time || true,
                     importance: payload.importance || 3,
@@ -497,7 +539,7 @@ export default class NotificationHandler {
                 showTimestamp: payload.time || false,
                 ongoing: payload.ongoing || false,
                 color:payload.color || '#FF0000', 
-                style: { type: AndroidStyle.BIGTEXT, text: payload.body },
+                style: { type:payload.body? AndroidStyle.BIGTEXT:undefined, text: payload.body },
 
                 progress: {
                     max: payload.progressSize || 0,
