@@ -22,6 +22,7 @@ let notificationHandler = new NotificationHandler();
 
 const CreateProgressNotification = () => {
   const [modalVisible, setModalVisible] = useState(false);
+  const [actionCount,setActionCount]=useState(1)
   const [values, setvalues] = useState({
     channelId: '',
     channelName: '',
@@ -36,7 +37,26 @@ const CreateProgressNotification = () => {
     progressSize:'',
     currentSize:'',
     indeterminate:null,
-    color:'#495371'
+    color:'#495371',
+    actionIdOne:'',
+    actionTitleOne:'',
+    actionIdTwo:undefined,
+    actionTitleTwo:undefined,
+    actionIdThree:undefined,
+    actionTitleThree:undefined,
+    actions:[],
+    iosActions:[],
+    actionValues:[{
+      title:'actionTitleOne',
+      id:'actionIdOne'
+    },{
+      title:'actionTitleTwo',
+      id:'actionIdTwo'
+    },{
+      title:'actionTitleThree',
+      id:'actionIdThree'
+    }]
+
     
   });
 
@@ -51,6 +71,28 @@ const CreateProgressNotification = () => {
   };
 
   const setNotifcation = () => {
+    if(values.actionIdOne && values.actionTitleOne){
+      values.actions.push({title:values.actionTitleOne,
+      pressAction:{
+        id:values.actionIdOne 
+      }})
+      values.iosActions.push({
+        id:values.actionIdOne ,
+        title:values.actionTitleOne,
+      })
+    }
+    if(values.actionIdTwo && values.actionTitleTwo){
+      values.actions.push({title:values.actionTitleTwo,
+      pressAction:{
+        id:values.actionIdTwo 
+      }})
+    }
+    if(values.actionIdThree && values.actionTitleThree){
+      values.actions.push({title:values.actionTitleThree ,
+      pressAction:{
+        id:values.actionIdThree  
+      }})
+    }
       console.log(parseInt(values.progressSize));
     const payload = {
       channelId: values.channelId,
@@ -66,10 +108,16 @@ const CreateProgressNotification = () => {
       indeterminate:values.indeterminate,
       progressSize:parseInt(values.progressSize),
       currentSize:parseInt(values.currentSize),
-      color:values.color
+      color:values.color,
+      AndroidActions:values.actions,
+      IosActions:values.iosActions
     };
     notificationHandler.progressNotification(payload);
   };
+
+  const increment=()=>{
+    setActionCount(actionCount=>actionCount+1)
+    }
 
   return (
     <SafeAreaView>
@@ -297,6 +345,40 @@ const CreateProgressNotification = () => {
             }}
           />
         </View>
+
+        {/* <Text style={styles.inputText}>Actions</Text>
+        
+        
+        {values.actionValues.slice(0,actionCount).map((item)=>(
+          <View key={item.id} style={styles.actionsView}>
+        <View style={styles.item}>
+          <Text>Title</Text>
+          <TextInput
+          style={styles.actionInput}
+          //value={values.item.title}
+          onChangeText={text => handleChange(item.title, text)}
+        />
+          </View>
+          <View style={styles.item}>
+          <Text>Id</Text>
+          <TextInput
+          style={styles.actionInput}
+          //value={values.item.id}
+          onChangeText={text => handleChange(item.id, text)}
+        />
+          </View>
+          </View>
+
+))}
+{actionCount<3 ? <Text style={styles.addIcon}>
+<FontAwesome5 
+onPress={increment}
+                name='plus-circle'
+                size={40}
+                color="#553C9A"
+              />;
+
+</Text>:null } */}
         
 
         <TouchableOpacity style={styles.ScreenButtonContainer} onPress={setNotifcation}>
@@ -403,6 +485,33 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     padding:5
   },
+  item: {
+    width: '50%', // is 50% of container width
+    color:'red'
+  },
+  addIcon:{
+    justifyContent:'center',
+    alignSelf:'center'
+  },
+  actionsView:{
+    flex: 1,
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    marginLeft: 20,
+    /* alignItems: 'flex-start' */
+  },
+  actionInput:{
+   
+    marginRight: 20,
+    marginLeft: 0,
+    marginBottom: 15,
+    height: 50,
+    borderColor: '#000000',
+    borderWidth: 1,
+    borderRadius: 8,
+    paddingLeft: 15,
+  
+},
 });
 
 const pickerSelectStyles = StyleSheet.create({

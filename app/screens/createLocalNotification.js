@@ -41,6 +41,7 @@ const CreateLocalNotification = () => {
     ongoing:null,
     asForegroundService:null,
     colorized:null,
+    iosActionId:'',
     actionIdOne:'',
     actionTitleOne:'',
     actionIdTwo:undefined,
@@ -127,7 +128,8 @@ const CreateLocalNotification = () => {
       colorized:values.colorized,
       image:values.image, 
       AndroidActions:values.actions,
-      IosActions:values.iosActions
+      IosActions:values.iosActions,
+      IosActionId:values.iosActionId
     };
     notificationHandler.getNotification(payload);
   };
@@ -397,7 +399,7 @@ setActionCount(actionCount=>actionCount+1)
             }}
           />
         </View>
-        <Text style={styles.inputText}>Actions</Text>
+        <Text style={styles.topic}>Actions</Text>
         
         
         {values.actionValues.slice(0,actionCount).map((item)=>(
@@ -432,12 +434,12 @@ onPress={increment}
 </Text>:null }
 
         <View>
-        <Text style={styles.topic}>iOS Notification Setup</Text>
-        <Text style={styles.inputText}>Color</Text>
+        <Text style={styles.topic}>iOS Actions Setup</Text>
+        <Text style={styles.inputText}>Category Id</Text>
         <TextInput
           style={styles.input}
-          value={values.color}
-          onChangeText={text => handleChange('color', text)}
+          value={values.iosActionId}
+          onChangeText={text => handleChange('iosActionId', text)}
         />
         </View>
         <TouchableOpacity style={styles.ScreenButtonContainer} onPress={setNotifcation}>
