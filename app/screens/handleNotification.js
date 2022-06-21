@@ -7,7 +7,7 @@ import {
   StyleSheet,
   ScrollView,
   TouchableOpacity,
-  Alert
+  Alert,FlatList
 } from 'react-native';
 import NotificationHandler from '../notification/notification';
 
@@ -35,8 +35,9 @@ const HandleNotification = () => {
       };
       const getData=async()=>{
         const returnedValue = await notificationHandler.getTriggerNotification()
-        alert(JSON.stringify(returnedValue))
+        settriggerNotification(returnedValue)
         console.log(JSON.stringify(returnedValue));
+        console.log(triggerNotifications);
        
       }
     
@@ -82,8 +83,16 @@ const HandleNotification = () => {
         <TouchableOpacity style={styles.ButtonContainer} onPress={
         getData}>
           <Text style={styles.ButtonText}>Get Trigger Notification Details</Text>
+          
         </TouchableOpacity>
-        
+        {triggerNotifications!=''?<Text style={styles.triggerTitleText}>Notification Ids</Text>:null}
+        {triggerNotifications.map((id)=>(
+          <View>
+         
+          <Text style={styles.triggerText}>{'\u2B24' + ' '}{id}</Text>
+          </View>
+         
+        ))}
         </View>
       </View>
       <View>
@@ -174,6 +183,16 @@ const styles = StyleSheet.create({
     textTransform: "uppercase",
     textAlign: 'center',
     padding:5
+  },
+  triggerText:{
+    marginLeft: 30,
+    color: '#553C9A',
+    fontSize:25
+  },
+  triggerTitleText:{
+    marginLeft: 30,
+    color:'#111111',
+    fontSize:25
   }
 });
 

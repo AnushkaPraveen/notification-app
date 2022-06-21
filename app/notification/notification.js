@@ -37,7 +37,7 @@ export default class NotificationHandler {
     }
 
     getNotification = async(payload) => {
-        console.log('this is payload', payload.AndroidActions);
+        console.log('this is payload', payload.importance);
         this.getIOSPermission()
 
         //notifee foreground event action handle (swicth)
@@ -90,7 +90,7 @@ export default class NotificationHandler {
         const channelId = await notifee.createChannel({
             id: payload.channelId || 'default',
             name: payload.name || 'default channel',
-            importance: payload.importance || 3,
+            importance:payload.importance || 3,
             vibration: payload.vibration || false,
             /* lights: false,
             lightColor: AndroidColor.RED, */
@@ -103,7 +103,8 @@ export default class NotificationHandler {
 
         }, ])
         try {
-            const x=({id: payload.notificationId || 'default',
+            const notificationData=({
+            id: payload.notificationId || 'default',
             title: payload.title || 'default',
             subtitle: payload.subtitle || '',
             body: payload.body || undefined,
@@ -114,7 +115,7 @@ export default class NotificationHandler {
                 /* payload.body && ...({style: {type:AndroidStyle.BIGTEXT, text:  payload.body}}), */
                /*  style: payload.body && {type:AndroidStyle.BIGTEXT, text:  payload.body}, */
                 /* style:{ type:AndroidStyle.BIGTEXT, text:  payload.body }, */
-               /*  style: { type: AndroidStyle.BIGPICTURE, picture: payload.image }, */
+              /*  style: { type: AndroidStyle.BIGPICTURE, picture: payload.image },  */
                 /* style: payload.image || undefined, */
                 showTimestamp: payload.time || false,
                 importance: payload.importance || 3,
@@ -141,47 +142,11 @@ export default class NotificationHandler {
                 sound: true,
             },})
             
-            if(payload.body)x.android.style={type:AndroidStyle.BIGTEXT, text: payload.body}
+            if(payload.body || payload.image)
+            notificationData.android.style={type:AndroidStyle.BIGTEXT, text: payload.body}
+           notificationData.android.style={type:AndroidStyle.BIGPICTURE,picture:payload.image} 
             await notifee.displayNotification({
-                ...x
-                /* id: payload.notificationId || 'default',
-                title: payload.title || 'default',
-                subtitle: payload.subtitle || '',
-                body: payload.body || undefined,
-                android: {
-                    channelId,
-                    largeIcon: payload.Icon || 'ic_launcher',
-                    smallIcon: 'ic_launcher', // optional, defaults to 'ic_launcher'.
-                    /* payload.body && ...({style: {type:AndroidStyle.BIGTEXT, text:  payload.body}}), */
-                   /*  style: payload.body && {type:AndroidStyle.BIGTEXT, text:  payload.body}, */
-                    /* style:{ type:AndroidStyle.BIGTEXT, text:  payload.body }, */
-                   /*  style: { type: AndroidStyle.BIGPICTURE, picture: payload.image }, */
-                    /* style: payload.image || undefined, 
-                    showTimestamp: payload.time || false,
-                    importance: payload.importance || 3,
-                    color: payload.color || '#495371',
-                    visibility: payload.visibility || 0,
-                    ongoing: payload.ongoing || false,
-                    asForegroundService: payload.foregroundService || false,
-                    colorized: payload.colorized || false,
-                    pressAction: {
-                        id: 'default',
-                    },
-                    actions: payload.AndroidActions || [],
-
-                },
-                ios: {
-                    categoryId: payload.IosActionId || 'default',
-                    sound: 'default',
-                    attachments: payload.IosImage || []
-
-                },
-                foregroundPresentationOptions: {
-                    alert: true,
-                    badge: true,
-                    sound: true,
-                }, */
-
+                ...notificationData
             })
         } catch (e) {
             console.log(e);
@@ -264,9 +229,10 @@ export default class NotificationHandler {
                 actions: payload.IosActions || []
 
             }, ])
-            // Create a trigger notification
-        await notifee.createTriggerNotification({
-                id: payload.notificationId || '1111',
+
+
+        const notificationData=({
+            id: payload.notificationId || '1111',
                 title: payload.title || 'Date Schedule Notification',
                 body: payload.body || 'This is Schedule Notification',
                 showTimestamp: true,
@@ -274,7 +240,6 @@ export default class NotificationHandler {
                     channelId,
                     largeIcon: payload.Icon || 'ic_launcher',
                     smallIcon: 'ic_launcher', // optional, defaults to 'ic_launcher'.
-                    style: { type:payload.body? AndroidStyle.BIGTEXT:undefined, text: payload.body },
                     style: payload.image || undefined,
                     showTimestamp: payload.time || true,
                     importance: payload.importance || 3,
@@ -296,9 +261,18 @@ export default class NotificationHandler {
                     badge: true,
                     sound: true,
                 },
-            },
-            trigger,
-        );
+            }
+        )
+            
+        if(payload.body || payload.image)
+            notificationData.android.style={type:AndroidStyle.BIGTEXT, text: payload.body}
+           /*  notificationData.android.style={type:AndroidStyle.BIGPICTURE,picture:payload.image} */
+            await notifee.createTriggerNotification({
+                ...notificationData
+            },trigger)
+            
+            // Create a trigger notification
+        
     }
 
 
@@ -357,16 +331,16 @@ export default class NotificationHandler {
                 actions: payload.IosActions || []
 
             }, ])
-            // Create a trigger notification
-        await notifee.createTriggerNotification({
-                id: payload.notificationId || '1111',
+
+        const notificationData=({
+            id: payload.notificationId || '1111',
                 title: payload.title || 'Time Schedule Notification',
                 body: payload.body || 'This is Schedule Notification',
                 android: {
                     channelId,
                     largeIcon: payload.Icon || 'ic_launcher',
                     smallIcon: 'ic_launcher', // optional, defaults to 'ic_launcher'.
-                    style: { type:payload.body? AndroidStyle.BIGTEXT:undefined, text: payload.body },
+                    
                     style: payload.image || undefined,
                     showTimestamp: payload.time || true,
                     importance: payload.importance || 3,
@@ -388,9 +362,14 @@ export default class NotificationHandler {
                     badge: true,
                     sound: true,
                 },
-            },
-            trigger,
-        );
+        })    
+            // Create a trigger notification
+            if(payload.body || payload.image)
+            notificationData.android.style={type:AndroidStyle.BIGTEXT, text: payload.body}
+           /*  notificationData.android.style={type:AndroidStyle.BIGPICTURE,picture:payload.image} */
+            await notifee.createTriggerNotification({
+                ...notificationData
+            },trigger)    
     }
 
     //Interval Trigger Notification
@@ -438,9 +417,9 @@ export default class NotificationHandler {
                 actions: payload.IosActions || []
 
             }, ])
-            // Create a trigger notification
-        await notifee.createTriggerNotification({
-                id: payload.notificationId || '1111',
+
+        const notificationData=({
+            id: payload.notificationId || '1111',
                 title: payload.title || 'Time Schedule Notification',
                 body: payload.body || 'This is Schedule Notification',
                 showTimestamp: true,
@@ -448,7 +427,7 @@ export default class NotificationHandler {
                     channelId,
                     largeIcon: payload.Icon || 'ic_launcher',
                     smallIcon: 'ic_launcher', // optional, defaults to 'ic_launcher'.
-                    style: { type:payload.body? AndroidStyle.BIGTEXT:undefined, text: payload.body },
+                    
                     style: payload.image || undefined,
                     showTimestamp: payload.time || true,
                     importance: payload.importance || 3,
@@ -470,9 +449,15 @@ export default class NotificationHandler {
                     badge: true,
                     sound: true,
                 },
-            },
-            IntervalTrigger,
-        );
+        })    
+
+          // Create a trigger notification
+          if(payload.body || payload.image)
+          notificationData.android.style={type:AndroidStyle.BIGTEXT, text: payload.body}
+         /*  notificationData.android.style={type:AndroidStyle.BIGPICTURE,picture:payload.image} */
+          await notifee.createTriggerNotification({
+              ...notificationData
+          },IntervalTrigger) 
     }
 
 
@@ -529,7 +514,7 @@ export default class NotificationHandler {
             vibration: payload.vibration || true,
         });
 
-        notifee.displayNotification({
+        const notificationData=({
             id: payload.notificationId || '1111',
             title: payload.title || '',
             body: payload.body || '',
@@ -539,7 +524,6 @@ export default class NotificationHandler {
                 showTimestamp: payload.time || false,
                 ongoing: payload.ongoing || false,
                 color:payload.color || '#FF0000', 
-                style: { type:payload.body? AndroidStyle.BIGTEXT:undefined, text: payload.body },
 
                 progress: {
                     max: payload.progressSize || 0,
@@ -547,7 +531,14 @@ export default class NotificationHandler {
                     indeterminate: payload.indeterminate || false,
                 },
             },
-        });
+        })
+
+        if(payload.body || payload.image)
+          notificationData.android.style={type:AndroidStyle.BIGTEXT, text: payload.body}
+         /*  notificationData.android.style={type:AndroidStyle.BIGPICTURE,picture:payload.image} */
+          await notifee.displayNotification({
+              ...notificationData
+          }) 
 
     }
 
@@ -621,12 +612,13 @@ export default class NotificationHandler {
     getTriggerNotification =async() => {
        
             let idValues;
-            await notifee.getTriggerNotificationIds()
-                .then((ids) => {
+           return await notifee.getTriggerNotificationIds()
+            
+               /*  .then((ids) => {
                     console.log(`🚀🚀 ===> ` + JSON.stringify(ids))
                     return ids
-                    /* idValues = ids; */
-                });
+                    /* idValues = ids; 
+                }); */
     
             /* return idValues; */
         }
