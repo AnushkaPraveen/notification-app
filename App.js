@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React,{useEffect} from 'react';
 
 import {
   SafeAreaView,
@@ -9,6 +9,7 @@ import {
   Text,
   useColorScheme,
   View,
+  Alert
 } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
@@ -20,10 +21,18 @@ import Help from './app/screens/help';
 import Loading from './app/screens/loading';
 
 import SubHome from './app/screens/subHome';
+import messaging from '@react-native-firebase/messaging';
 
 const Stack = createNativeStackNavigator();
 
 const App= () => {
+  useEffect(() => {
+    const unsubscribe = messaging().onMessage(async remoteMessage => {
+      Alert.alert('A new FCM message arrived!', JSON.stringify(remoteMessage));
+    });
+
+    return unsubscribe;
+  }, []);
  
   return (
     <NavigationContainer independent={true}>

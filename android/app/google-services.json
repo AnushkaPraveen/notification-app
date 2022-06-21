@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "432859618489",
+    "project_id": "notifee-firebase",
+    "storage_bucket": "notifee-firebase.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:432859618489:android:1d4384a1d8e3e7b2578f68",
+        "android_client_info": {
+          "package_name": "com.notification"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "432859618489-sahmsv3sm93bbgdgetrqkt1ngibdu7s7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCTANIgiLKCf9WD-Pv_O4Xukj0EXHYsJpw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "432859618489-sahmsv3sm93bbgdgetrqkt1ngibdu7s7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
