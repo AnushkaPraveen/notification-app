@@ -40,6 +40,11 @@ const HandleNotification = () => {
         console.log(triggerNotifications);
        
       }
+      const getBadgeCount = async () => {
+       const value =  await notificationHandler.getBadgeCount();
+       console.log(value);
+       Alert.alert("Badge Count: "+ value);
+      }
     
       const setBadgeCount =() => {
         notificationHandler.setBadgeCount(parseInt(values.badgeCount))
@@ -124,8 +129,7 @@ const HandleNotification = () => {
         <View>
         <Text style={styles.inputText}>Get Badge Count</Text>
         <View>
-        <TouchableOpacity style={styles.ButtonContainer} onPress={
-        getData}>
+        <TouchableOpacity style={styles.ButtonContainer} onPress={getBadgeCount}>
           <Text style={styles.ButtonText}>Get Badge Count</Text>
         </TouchableOpacity>
         

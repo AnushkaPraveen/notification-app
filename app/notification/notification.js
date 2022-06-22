@@ -593,8 +593,8 @@ export default class NotificationHandler {
         };
     }
 
-    getBadgeCount = () => {
-        notifee.getBadgeCount().then(count => console.log('Current badge count: ', count));
+    getBadgeCount = async () => {
+        return  await notifee.getBadgeCount();
     }
     setBadgeCount = (count) => {
         console.log(count);
