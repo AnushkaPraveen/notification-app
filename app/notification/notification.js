@@ -37,7 +37,7 @@ export default class NotificationHandler {
     }
 
     getNotification = async(payload) => {
-        console.log('this is payload', payload.importance);
+        console.log('this is payload', payload);
         this.getIOSPermission()
 
         //notifee foreground event action handle (swicth)

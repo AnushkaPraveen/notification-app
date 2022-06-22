@@ -103,12 +103,20 @@ const CreateLocalNotification = () => {
       pressAction:{
         id:values.actionIdTwo 
       }})
+      values.iosActions.push({
+        id:values.actionIdTwo ,
+        title:values.actionTitleTwo,
+      })
     }
     if(values.actionIdThree && values.actionTitleThree){
       values.actions.push({title:values.actionTitleThree ,
       pressAction:{
         id:values.actionIdThree  
       }})
+      values.iosActions.push({
+        id:values.actionIdThree ,
+        title:values.actionTitleThree,
+      })
     }
     
     const payload = {
