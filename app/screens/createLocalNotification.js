@@ -323,6 +323,7 @@ const showToast = () => {
           style={styles.input}
           value={values.icon}
           placeholder="URL"
+          placeholderTextColor="#000" 
           onChangeText={text => handleChange('icon', text)}
         />
         <Text style={styles.inputText}>Image</Text>
@@ -457,17 +458,21 @@ const showToast = () => {
         {values.actionValues.slice(0,actionCount).map((item)=>(
           <View key={item.id} style={styles.actionsView}>
         <View style={styles.item}>
-          <Text>Title</Text>
+          <Text style={styles.actionTitle}>Title</Text>
           <TextInput
           style={styles.actionInput}
+          placeholder="e.g - Okay"
+          placeholderTextColor="#000" 
           //value={values.item.title}
           onChangeText={text => handleChange(item.title, text)}
         />
           </View>
           <View style={styles.item}>
-          <Text>Id</Text>
+          <Text style={styles.actionTitle}>Id</Text>
           <TextInput
           style={styles.actionInput}
+          placeholder="e.g - action id"
+          placeholderTextColor="#000" 
           //value={values.item.id}
           onChangeText={text => handleChange(item.id, text)}
         />
@@ -492,6 +497,7 @@ onPress={increment}
           style={styles.input}
           value={values.iosActionId}
           placeholder="e.g - actioncategory123"
+          placeholderTextColor="#000" 
           onChangeText={text => handleChange('iosActionId', text)}
         />
         </View>
@@ -635,6 +641,9 @@ const styles = StyleSheet.create({
   addIcon:{
     justifyContent:'center',
     alignSelf:'center'
+  },
+  actionTitle:{
+    color:'#000000'
   }
   
 });
