@@ -18,8 +18,32 @@ import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import DatePicker from 'react-native-date-picker'
 import moment from 'moment';
 import { CromaColorPicker as ColorPicker } from "croma-color-picker";
+import Toast,{BaseToast} from 'react-native-toast-message';
+
 
 let notificationHandler = new NotificationHandler();
+const toastConfig = {
+  /*
+    Overwrite 'success' type,
+    by modifying the existing `BaseToast` component
+  */
+  success: (props) => (
+    <BaseToast
+      {...props}
+      style={{ borderLeftColor: '#4CAF50' ,backgroundColor:'#553C9A',color:'red'}}
+      contentContainerStyle={{ paddingHorizontal: 15 }}
+      text1Style={{
+        fontSize: 18,
+        fontWeight: '400',
+        color:'white'
+      }}
+      text2Style={{
+        fontSize: 15,
+        fontWeight: '400',
+        color:'white'
+      }}
+    />
+  ),}
 
 const {height, width} = Dimensions.get('window');
 
@@ -138,6 +162,7 @@ const SheduleNotification = () => {
       IosActions:values.iosActions
     };
     notificationHandler.scheduleNotification(payload);
+    showToast()
   };
 
   const test=()=>{
@@ -146,6 +171,13 @@ const SheduleNotification = () => {
 
   const increment=()=>{
     setActionCount(actionCount=>actionCount+1)
+    }
+
+    const showToast = () => {
+      Toast.show({
+        type: 'success',
+        text1: '\u2713 Notification Created',
+      });
     }
 
   return (
@@ -474,7 +506,7 @@ onPress={increment}
                 name='plus-circle'
                 size={40}
                 color="#553C9A"
-              />;
+              />
 
 </Text>:null }
 
@@ -492,6 +524,8 @@ onPress={increment}
           <Text style={styles.ScreenButtonText}>Create</Text>
         </TouchableOpacity>
       </ScrollView>
+      <Toast config={toastConfig} position='top'
+        bottomOffset={20}/>
     </SafeAreaView>
   );
 };

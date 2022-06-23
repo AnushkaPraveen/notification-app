@@ -17,11 +17,33 @@ import {SafeAreaView} from 'react-native-safe-area-context';
 import RNPickerSelect from 'react-native-picker-select';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import { CromaColorPicker as ColorPicker } from "croma-color-picker";
-
+import Toast,{BaseToast} from 'react-native-toast-message';
 
 let notificationHandler = new NotificationHandler();
 
 const {height, width} = Dimensions.get('window');
+const toastConfig = {
+  /*
+    Overwrite 'success' type,
+    by modifying the existing `BaseToast` component
+  */
+  success: (props) => (
+    <BaseToast
+      {...props}
+      style={{ borderLeftColor: '#4CAF50' ,backgroundColor:'#553C9A',color:'red'}}
+      contentContainerStyle={{ paddingHorizontal: 15 }}
+      text1Style={{
+        fontSize: 18,
+        fontWeight: '400',
+        color:'white'
+      }}
+      text2Style={{
+        fontSize: 15,
+        fontWeight: '400',
+        color:'white'
+      }}
+    />
+  ),}
 
 const CreateProgressNotification = () => {
   const [modalVisible, setModalVisible] = useState(false);
@@ -116,10 +138,18 @@ const CreateProgressNotification = () => {
       IosActions:values.iosActions
     };
     notificationHandler.progressNotification(payload);
+    showToast();
   };
 
   const increment=()=>{
     setActionCount(actionCount=>actionCount+1)
+    }
+
+    const showToast = () => {
+      Toast.show({
+        type: 'success',
+        text1: '\u2713 Notification Created',
+      });
     }
 
   return (
@@ -388,6 +418,8 @@ onPress={increment}
           <Text style={styles.ScreenButtonText}>Create</Text>
         </TouchableOpacity>
       </ScrollView>
+      <Toast config={toastConfig} position='top'
+        bottomOffset={20}/>
     </SafeAreaView>
   );
 };
