@@ -8,7 +8,8 @@ import {
   ScrollView,
   Modal,
   Alert,
-  TouchableOpacity
+  TouchableOpacity,
+  Dimensions
 } from 'react-native';
 import notifee from '@notifee/react-native';
 import DropDownPicker from 'react-native-dropdown-picker';
@@ -20,6 +21,8 @@ import { CromaColorPicker as ColorPicker } from "croma-color-picker";
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 
 let notificationHandler = new NotificationHandler();
+
+const {height, width} = Dimensions.get('window');
 
 const CreateLocalNotification = () => {
   const [modalVisible, setModalVisible] = useState(false);
@@ -167,6 +170,7 @@ setActionCount(actionCount=>actionCount+1)
             style={styles.input}
             value={values.channelId}
             placeholder="e.g - channel123"
+            placeholderTextColor="#000" 
             onChangeText={text => handleChange('channelId', text)}
           />
           <Text style={styles.inputText}>Channel Name</Text>
@@ -174,6 +178,7 @@ setActionCount(actionCount=>actionCount+1)
             style={styles.input}
             value={values.channelName}
             placeholder="e.g - Channel 123"
+            placeholderTextColor="#000" 
             onChangeText={text => handleChange('channelName', text)}
           />
           <View>
@@ -205,6 +210,7 @@ setActionCount(actionCount=>actionCount+1)
             style={styles.input}
             value={values.notificationId}
             placeholder="e.g - 123"
+            placeholderTextColor="#000" 
             onChangeText={text => handleChange('notificationId', text)}
           />
           <Text style={styles.inputText}>Title</Text>
@@ -214,6 +220,7 @@ setActionCount(actionCount=>actionCount+1)
             numberOfLines={4}
             value={values.title}
             placeholder="e.g - Notification Title"
+            placeholderTextColor="#000" 
             onChangeText={text => handleChange('title', text)}
           />
           <Text style={styles.inputText}>Subtitle</Text>
@@ -221,6 +228,7 @@ setActionCount(actionCount=>actionCount+1)
             style={styles.input}
             value={values.subtitle}
             placeholder="e.g - Notification Subtitle"
+            placeholderTextColor="#000" 
             onChangeText={text => handleChange('subtitle', text)}
           />
           <Text style={styles.inputText}>Notification Body</Text>
@@ -230,6 +238,7 @@ setActionCount(actionCount=>actionCount+1)
             numberOfLines={5}
             multiline={true}
             placeholder="Main body content of the notification"
+            placeholderTextColor="#000" 
             onChangeText={text => handleChange('body', text)}
           />
         </View>
@@ -287,6 +296,7 @@ setActionCount(actionCount=>actionCount+1)
           style={styles.input}
           value={values.image}
           placeholder="URL"
+          placeholderTextColor="#000" 
           onChangeText={text => handleChange('image', text)}
         />
         <View>
@@ -468,6 +478,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderRadius: 8,
     paddingLeft: 15,
+    color:'#000000',
   },
   inputText: {
     marginLeft: 20,
@@ -477,6 +488,7 @@ const styles = StyleSheet.create({
   specialInput:{
     height:100,
     paddingRight: 15,
+    color:'#000000',
   },
   actionInput:{
    
@@ -488,6 +500,7 @@ const styles = StyleSheet.create({
       borderWidth: 1,
       borderRadius: 8,
       paddingLeft: 15,
+      color:'#000000',
     
   },
   buttonArea: {
@@ -501,6 +514,7 @@ const styles = StyleSheet.create({
     marginLeft: 15,
     fontWeight: 'bold',
     marginTop: 10,
+    color:'#000000',
   },centeredView: {
     flex: 1,
     justifyContent: "center",
@@ -597,8 +611,8 @@ const pickerSelectStyles = StyleSheet.create({
     borderRadius: 8,
     color: 'black',
     paddingRight: 30, // to ensure the text is never behind the icon
-    marginLeft:20,
-    marginRight:20
+    marginLeft:(width*5)/ 100,
+    marginRight:(width*5)/ 100,
   },
   inputAndroid: {
     fontSize: 16,
@@ -609,8 +623,8 @@ const pickerSelectStyles = StyleSheet.create({
     borderRadius: 8,
     color: 'black',
     paddingRight: 30, // to ensure the text is never behind the icon
-    marginLeft:20,
-    marginRight:20
+    marginLeft:(width*5)/ 100,
+    marginRight:(width*5)/ 100,
   },
   placeholder: {
     color: 'black',

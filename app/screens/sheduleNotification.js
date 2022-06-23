@@ -6,7 +6,8 @@ import {
   TextInput,
   StyleSheet,
   ScrollView,
-  TouchableOpacity,Modal,Alert
+  TouchableOpacity,Modal,Alert,
+  Dimensions
 } from 'react-native';
 import notifee from '@notifee/react-native';
 import DropDownPicker from 'react-native-dropdown-picker';
@@ -19,6 +20,8 @@ import moment from 'moment';
 import { CromaColorPicker as ColorPicker } from "croma-color-picker";
 
 let notificationHandler = new NotificationHandler();
+
+const {height, width} = Dimensions.get('window');
 
 const SheduleNotification = () => {
   const [modalVisible, setModalVisible] = useState(false);
@@ -495,8 +498,8 @@ onPress={increment}
 
 const styles = StyleSheet.create({
   input: {
-    marginRight: 20,
-    marginLeft: 20,
+    marginRight:(width*10)/ 100,
+    marginLeft: (width*10)/ 100,
     marginBottom: 15,
     height: 40,
     borderColor: '#000000',

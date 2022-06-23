@@ -7,7 +7,8 @@ import {
   StyleSheet,
   ScrollView,
   Modal,Alert,
-  TouchableOpacity
+  TouchableOpacity,
+  Dimensions
 } from 'react-native';
 import notifee from '@notifee/react-native';
 import DropDownPicker from 'react-native-dropdown-picker';
@@ -19,6 +20,8 @@ import { CromaColorPicker as ColorPicker } from "croma-color-picker";
 
 
 let notificationHandler = new NotificationHandler();
+
+const {height, width} = Dimensions.get('window');
 
 const CreateProgressNotification = () => {
   const [modalVisible, setModalVisible] = useState(false);
@@ -391,22 +394,25 @@ onPress={increment}
 
 const styles = StyleSheet.create({
   input: {
-    marginRight: 20,
-    marginLeft: 20,
+    marginRight: (width*5)/ 100,
+    marginLeft: (width*5)/ 100,
     marginBottom: 15,
     height: 50,
     borderColor: '#000000',
     borderWidth: 1,
     borderRadius: 8,
     paddingLeft: 15,
+    color:'#000000',
   },
   specialInput:{
     height:100,
     paddingRight: 15,
+    color:'#000000',
   },
   inputText: {
-    marginLeft: 20,
+    marginLeft: (width*5)/ 100,
     color: '#000000',
+    color:'#000000',
   },
   buttonArea: {
     flex: 1,
@@ -416,9 +422,10 @@ const styles = StyleSheet.create({
   },
   topic: {
     fontSize: 20,
-    marginLeft: 15,
+    marginLeft: (width*5)/ 100,
     fontWeight: 'bold',
     marginTop: 10,
+    color:'#000000',
   },
   centeredView: {
     flex: 1,
@@ -462,8 +469,8 @@ const styles = StyleSheet.create({
     paddingVertical: 5,
     paddingHorizontal: 5,
     marginTop: 0,
-    marginLeft: 150,
-    marginRight: 150,
+    marginLeft: (width*10)/ 100,
+    marginRight: (width*10)/ 100,
     marginBottom: 10,
     
   },
@@ -502,7 +509,7 @@ const styles = StyleSheet.create({
   },
   actionInput:{
    
-    marginRight: 20,
+    marginRight: (width*5)/ 100,
     marginLeft: 0,
     marginBottom: 15,
     height: 50,

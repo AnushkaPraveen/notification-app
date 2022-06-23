@@ -7,9 +7,13 @@ import {
   StyleSheet,
   ScrollView,
   TouchableOpacity,
-  Alert,FlatList
+  Alert,FlatList,
+  Dimensions,
+  PixelRatio
 } from 'react-native';
 import NotificationHandler from '../notification/notification';
+
+const {height, width} = Dimensions.get('window');
 
 let notificationHandler = new NotificationHandler();
 
@@ -142,18 +146,21 @@ const HandleNotification = () => {
 
 const styles = StyleSheet.create({
   input: {
-    marginRight: 20,
-    marginLeft: 20,
+    marginRight: (width*5)/ 100,
+    marginLeft: (width*5)/ 100,
     marginBottom: 15,
-    height: 40,
+    height: (height * 5.5) / 100,
     borderColor: '#000000',
     borderWidth: 1,
     borderRadius: 8,
     paddingLeft: 15,
+    color:'#000000',
   },
   inputText: {
-    marginLeft: 20,
+    marginLeft: (width*5)/ 100,
     color: '#000000',
+    marginTop: (height * 0.5) / 100,
+    marginBottom:  (height * 0.5) / 100, 
   },
   buttonArea: {
     flex: 1,
@@ -165,7 +172,9 @@ const styles = StyleSheet.create({
     fontSize: 25,
     marginLeft: 15,
     fontWeight: 'bold',
-    marginTop: 10,
+    marginTop: (height * 1.5) / 100,
+    marginBottom:  (height * 1.5) / 100,
+    color: '#000000',
   },
   ButtonContainer: {
     elevation: 8,
@@ -174,8 +183,8 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
     paddingHorizontal: 12,
     marginTop: 0,
-    marginLeft: 50,
-    marginRight: 50,
+    marginLeft: (width*10)/ 100,
+    marginRight: (width*10)/ 100,
     marginBottom: 10,
     
   },
