@@ -25,6 +25,17 @@ export default class NotificationHandler {
         }
     }
 
+    setChannel=async(payload)=>{
+        console.log(payload);
+        await notifee.createChannel({
+            id: payload.channelId || 'default',
+            name: payload.name || 'default channel',
+            importance:payload.importance || 3,
+            vibration: payload.vibration || false,
+            visibility: payload.visibility || 0,
+          });
+    }
+
     setCategories = async(payload)=>{
         await notifee.setNotificationCategories([
             {
@@ -149,7 +160,7 @@ export default class NotificationHandler {
                 ...notificationData
             })
         } catch (e) {
-            console.log(e);
+            return e;
         }
 
 
@@ -374,6 +385,7 @@ export default class NotificationHandler {
 
     //Interval Trigger Notification
     IntervalScheduleNotification = async(payload) => {
+        console.log("this is payload in interval notification - ",payload);
         //notifee foreground event action handle (swicth)
         notifee.onForegroundEvent(async({ type, detail }) => {
             switch (type) {
@@ -598,7 +610,7 @@ export default class NotificationHandler {
     }
     setBadgeCount = (count) => {
         console.log(count);
-        notifee.setBadgeCount(count).then(() => console.log('Badge count set!'));
+        notifee.setBadgeCount(count).then(() => console.log("Badge Count Set"))
     }
 
     incrementBadgeCount = (count) => {

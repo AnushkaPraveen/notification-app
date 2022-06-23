@@ -17,8 +17,32 @@ import {SafeAreaView} from 'react-native-safe-area-context';
 import RNPickerSelect from 'react-native-picker-select';
 import { CromaColorPicker as ColorPicker } from "croma-color-picker";
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
+import Toast,{BaseToast} from 'react-native-toast-message';
 
 let notificationHandler = new NotificationHandler();
+
+const toastConfig = {
+  /*
+    Overwrite 'success' type,
+    by modifying the existing `BaseToast` component
+  */
+  success: (props) => (
+    <BaseToast
+      {...props}
+      style={{ borderLeftColor: '#4CAF50' ,backgroundColor:'#553C9A',color:'red'}}
+      contentContainerStyle={{ paddingHorizontal: 15 }}
+      text1Style={{
+        fontSize: 18,
+        fontWeight: '400',
+        color:'white'
+      }}
+      text2Style={{
+        fontSize: 15,
+        fontWeight: '400',
+        color:'white'
+      }}
+    />
+  ),}
 
 const IntervalSheduleNotification = () => {
   const [modalVisible, setModalVisible] = useState(false);
@@ -131,12 +155,19 @@ const IntervalSheduleNotification = () => {
       interval:parseInt(values.interval)
     };
     notificationHandler.IntervalScheduleNotification(payload);
+    showToast()
   };
 
   const increment=()=>{
     setActionCount(actionCount=>actionCount+1)
     }
 
+    const showToast = () => {
+      Toast.show({
+        type: 'success',
+        text1: '\u2713 Notification Created',
+      });
+    }
 
   return (
     <SafeAreaView>
@@ -243,6 +274,7 @@ const IntervalSheduleNotification = () => {
           <TextInput
           style={styles.input}
           value={values.interval}
+          placeholder="e.g - 15"
           keyboardType='numeric'
           onChangeText={text => handleChange('interval', text)}
         />
@@ -293,12 +325,14 @@ const IntervalSheduleNotification = () => {
         <TextInput
           style={styles.input}
           value={values.icon}
+          placeholder="URL"
           onChangeText={text => handleChange('icon', text)}
         />
         <Text style={styles.inputText}>Image</Text>
         <TextInput
           style={styles.input}
           value={values.image}
+          placeholder="URL"
           onChangeText={text => handleChange('image', text)}
         />
         <View>
@@ -450,7 +484,7 @@ onPress={increment}
                 name='plus-circle'
                 size={40}
                 color="#553C9A"
-              />;
+              />
 
 </Text>:null }
 
@@ -468,6 +502,8 @@ onPress={increment}
           <Text style={styles.ScreenButtonText}>Create</Text>
         </TouchableOpacity>
       </ScrollView>
+      <Toast config={toastConfig} position='top'
+        bottomOffset={20}/>
     </SafeAreaView>
   );
 };

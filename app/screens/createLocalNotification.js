@@ -18,8 +18,33 @@ import RNPickerSelect from 'react-native-picker-select';
 import { SketchPicker } from 'react-color';
 import { CromaColorPicker as ColorPicker } from "croma-color-picker";
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
+import Toast,{BaseToast} from 'react-native-toast-message';
 
 let notificationHandler = new NotificationHandler();
+
+
+const toastConfig = {
+  /*
+    Overwrite 'success' type,
+    by modifying the existing `BaseToast` component
+  */
+  success: (props) => (
+    <BaseToast
+      {...props}
+      style={{ borderLeftColor: '#4CAF50' ,backgroundColor:'#553C9A',color:'red'}}
+      contentContainerStyle={{ paddingHorizontal: 15 }}
+      text1Style={{
+        fontSize: 18,
+        fontWeight: '400',
+        color:'white'
+      }}
+      text2Style={{
+        fontSize: 15,
+        fontWeight: '400',
+        color:'white'
+      }}
+    />
+  ),}
 
 const CreateLocalNotification = () => {
   const [modalVisible, setModalVisible] = useState(false);
@@ -88,6 +113,7 @@ const CreateLocalNotification = () => {
   };
 
   const setNotifcation = () => {
+
     if(values.actionIdOne && values.actionTitleOne){
       values.actions.push({title:values.actionTitleOne,
       pressAction:{
@@ -139,7 +165,8 @@ const CreateLocalNotification = () => {
       IosActions:values.iosActions,
       IosActionId:values.iosActionId
     };
-    notificationHandler.getNotification(payload);
+    notificationHandler.getNotification(payload)
+    showToast()
   };
 
   const data = [
@@ -153,6 +180,13 @@ const CreateLocalNotification = () => {
   ];
 const increment=()=>{
 setActionCount(actionCount=>actionCount+1)
+}
+
+const showToast = () => {
+  Toast.show({
+    type: 'success',
+    text1: '\u2713 Notification Created',
+  });
 }
 
   return (
@@ -280,6 +314,7 @@ setActionCount(actionCount=>actionCount+1)
         <TextInput
           style={styles.input}
           value={values.icon}
+          placeholder="URL"
           onChangeText={text => handleChange('icon', text)}
         />
         <Text style={styles.inputText}>Image</Text>
@@ -437,7 +472,7 @@ onPress={increment}
                 name='plus-circle'
                 size={40}
                 color="#553C9A"
-              />;
+              />
 
 </Text>:null }
 
@@ -447,13 +482,17 @@ onPress={increment}
         <TextInput
           style={styles.input}
           value={values.iosActionId}
+          placeholder="e.g - actioncategory123"
           onChangeText={text => handleChange('iosActionId', text)}
         />
         </View>
         <TouchableOpacity style={styles.ScreenButtonContainer} onPress={setNotifcation}>
           <Text style={styles.ScreenButtonText}>Create</Text>
         </TouchableOpacity>
+        
       </ScrollView>
+      <Toast config={toastConfig} position='top'
+        bottomOffset={20}/>
     </SafeAreaView>
   );
 };
