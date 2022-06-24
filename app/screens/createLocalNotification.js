@@ -526,7 +526,7 @@ const styles = StyleSheet.create({
   },
   inputText: {
     marginLeft: 20,
-    color: '#000000',
+    color: '#9f9c9c',
     
   },
   specialInput:{
@@ -558,7 +558,7 @@ const styles = StyleSheet.create({
     marginLeft: 15,
     fontWeight: 'bold',
     marginTop: 10,
-    color:'#000000',
+    color:'#767676',
   },centeredView: {
     flex: 1,
     justifyContent: "center",

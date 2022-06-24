@@ -22,6 +22,7 @@ import Toast,{BaseToast} from 'react-native-toast-message';
 let notificationHandler = new NotificationHandler();
 
 const {height, width} = Dimensions.get('window');
+
 const toastConfig = {
   /*
     Overwrite 'success' type,
@@ -161,14 +162,14 @@ const CreateProgressNotification = () => {
           <TextInput
             style={styles.input}
             value={values.channelId}
-            placeholder="e.g - channel123"
+            placeholder="e.g - channel123" placeholderTextColor = '#000'
             onChangeText={text => handleChange('channelId', text)}
           />
           <Text style={styles.inputText}>Channel Name</Text>
           <TextInput
             style={styles.input}
             value={values.channelName}
-            placeholder="e.g - channel 123"
+            placeholder="e.g - channel 123" placeholderTextColor = '#000'
             onChangeText={text => handleChange('channelName', text)}
           />
           <View>
@@ -198,7 +199,7 @@ const CreateProgressNotification = () => {
           <TextInput
             style={styles.input}
             value={values.notificationId}
-            placeholder="e.g - 123"
+            placeholder="e.g - 123" placeholderTextColor = '#000'
             onChangeText={text => handleChange('notificationId', text)}
           />
           <Text style={styles.inputText}>Title</Text>
@@ -207,7 +208,7 @@ const CreateProgressNotification = () => {
             value={values.title}
             numberOfLines={5}
             multiline={true}
-            placeholder="e.g - Notification Title"
+            placeholder="e.g - Notification Title" placeholderTextColor = '#000'
             onChangeText={text => handleChange('title', text)}
           />
           <Text style={styles.inputText}>Notification Body</Text>
@@ -216,7 +217,7 @@ const CreateProgressNotification = () => {
             value={values.body}
             numberOfLines={5}
             multiline={true}
-            placeholder="e.g - Body content of the progress notification"
+            placeholder="e.g - Body content of the progress notification" placeholderTextColor = '#000'
             onChangeText={text => handleChange('body', text)}
           />
         </View>
@@ -228,7 +229,7 @@ const CreateProgressNotification = () => {
             style={styles.input}
             value={values.progressSize}
             keyboardType='numeric'
-            placeholder="e.g - 10"
+            placeholder="e.g - 10" placeholderTextColor = '#000'
             onChangeText={text => handleChange('progressSize',text)}
           />
           <Text style={styles.inputText}>Current Size</Text>
@@ -236,7 +237,7 @@ const CreateProgressNotification = () => {
             style={styles.input}
             value={values.currentSize}
             keyboardType='numeric'
-            placeholder="e.g - 5"
+            placeholder="e.g - 5" placeholderTextColor = '#000'
             onChangeText={text => handleChange('currentSize', text)}
           />
           <Text style={styles.inputText}>Color</Text>
@@ -428,7 +429,7 @@ const styles = StyleSheet.create({
   input: {
     marginRight: (width*5)/ 100,
     marginLeft: (width*5)/ 100,
-    marginBottom: 15,
+    marginBottom: (height*1.5)/ 100,
     height: 50,
     borderColor: '#000000',
     borderWidth: 1,
@@ -443,21 +444,22 @@ const styles = StyleSheet.create({
   },
   inputText: {
     marginLeft: (width*5)/ 100,
-    color: '#000000',
-    color:'#000000',
+    marginBottom:(height*0.05)/ 100,
+    color: '#9f9c9c',
   },
   buttonArea: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
     marginBottom: 15,
+    marginTop:(height*.5)/ 100,
   },
   topic: {
     fontSize: 20,
     marginLeft: (width*5)/ 100,
     fontWeight: 'bold',
     marginTop: 10,
-    color:'#000000',
+    color:'#767676',
   },
   centeredView: {
     flex: 1,
@@ -488,10 +490,10 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     paddingVertical: 10,
     paddingHorizontal: 12,
-    marginTop: 5,
-    marginLeft: 50,
-    marginRight: 50,
-    marginBottom: 10,
+    marginTop: (height*10)/ 100,
+    marginLeft: (height*5)/ 100,
+    marginRight: (width*5)/ 100,
+    marginBottom: (width*15)/ 100,
     
   },
   ScreenButtonContainer: {
@@ -507,7 +509,7 @@ const styles = StyleSheet.create({
     
   },
   ButtonText: {
-    fontSize: 18,
+    fontSize: 20,
     color: "#fff",
     fontWeight: "bold",
     alignSelf: "center",
@@ -575,9 +577,10 @@ const pickerSelectStyles = StyleSheet.create({
     borderRadius: 8,
     color: 'black',
     paddingRight: 30, // to ensure the text is never behind the icon
-    marginLeft:20,
-    marginRight:20,
-    marginBottom:15
+    marginLeft:(width*5)/ 100,
+    marginRight:(width*5)/ 100,
+    marginBottom:(height*0.5)/ 100,
+    marginTop:(height*1.5)/ 100,
   },
   placeholder: {
     color: 'black',

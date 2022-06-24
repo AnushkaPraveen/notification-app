@@ -167,7 +167,7 @@ const HandleNotification = () => {
         <Text style={styles.topic}>Common Functions</Text>
         <Text style={styles.subTopic}>Cancel Notification</Text>
         <Text style={styles.inputText}>Notification Id</Text>
-        <TextInput style={styles.input} placeholder="e.g - 123" onChangeText={text => handleChange('notificationId', text)}/>
+        <TextInput style={styles.input} placeholder="e.g - 123"  placeholderTextColor = '#000' onChangeText={text => handleChange('notificationId', text)}/>
         <View>
         <TouchableOpacity style={styles.ButtonContainer} onPress={cancelNotification}>
           <Text style={styles.ButtonText}>Cancel Notification</Text>
@@ -184,6 +184,7 @@ const HandleNotification = () => {
             style={styles.input}
             value={values.channelId}
             placeholder="e.g - channel123"
+            placeholderTextColor = '#000'
             onChangeText={text => handleChange('channelId', text)}
           />
           <Text style={styles.inputText}>Channel Name</Text>
@@ -191,6 +192,7 @@ const HandleNotification = () => {
             style={styles.input}
             value={values.channelName}
             placeholder="e.g - Channel 123"
+            placeholderTextColor = '#000'
             onChangeText={text => handleChange('channelName', text)}
           />
           <View>
@@ -261,7 +263,7 @@ const HandleNotification = () => {
       </View>
       <Text style={styles.subTopic}>Delete Channel</Text>
         <Text style={styles.inputText}>Channel Id</Text>
-        <TextInput style={styles.input} placeholder="e.g - channel123" onChangeText={text => handleChange('channelId', text)}/>
+        <TextInput style={styles.input} placeholder="e.g - channel123" placeholderTextColor = '#000' onChangeText={text => handleChange('channelId', text)}/>
         <View>
         <TouchableOpacity style={styles.ButtonContainer} onPress={deleteChannel}>
           <Text style={styles.ButtonText}>Delete Channel</Text>
@@ -292,7 +294,7 @@ const HandleNotification = () => {
         <View>
         <Text style={styles.subTopic}>Set Badge Count</Text>
         <Text style={styles.inputText}>Count</Text>
-        <TextInput style={styles.input} placeholder="e.g - 123"
+        <TextInput style={styles.input} placeholder="e.g - 123" placeholderTextColor = '#000'
         keyboardType='numeric' onChangeText={text => handleChange('badgeCount', text)}/>
          <TouchableOpacity style={styles.ButtonContainer} onPress={setBadgeCount}>
           <Text style={styles.ButtonText}>Set Badge Count</Text>
@@ -301,7 +303,7 @@ const HandleNotification = () => {
         <View>
         <Text style={styles.subTopic}>Increament Badge Count</Text>
         <Text style={styles.inputText}>Count</Text>
-        <TextInput style={styles.input} placeholder="e.g - 123"
+        <TextInput style={styles.input} placeholder="e.g - 123" placeholderTextColor = '#000'
         keyboardType='numeric' onChangeText={text => handleChange('increamentBadgeCount', text)}/>
          <TouchableOpacity style={styles.ButtonContainer} onPress={Increment}>
           <Text style={styles.ButtonText}>Increment Count</Text>
@@ -310,7 +312,7 @@ const HandleNotification = () => {
         <View>
         <Text style={styles.subTopic}>Decrement Badge Count</Text>
         <Text style={styles.inputText}>Count</Text>
-        <TextInput style={styles.input} placeholder="e.g - 123"
+        <TextInput style={styles.input} placeholder="e.g - 123" placeholderTextColor = '#000'
         keyboardType='numeric' onChangeText={text => handleChange('decreamentBadgeCount', text)}/>
          <TouchableOpacity style={styles.ButtonContainer} onPress={Decrement}>
           <Text style={styles.ButtonText}>Decrement Badge Count</Text>
@@ -339,7 +341,7 @@ const styles = StyleSheet.create({
   input: {
     marginRight: (width*5)/ 100,
     marginLeft: (width*5)/ 100,
-    marginBottom: 15,
+    marginBottom: (height *1.5) / 100,
     height: (height * 5.5) / 100,
     borderColor: '#000000',
     borderWidth: 1,
@@ -351,27 +353,28 @@ const styles = StyleSheet.create({
     marginLeft: (width*5)/ 100,
     color: '#000000',
     marginTop: (height * 0.5) / 100,
-    marginBottom:  (height * 0.5) / 100, 
+    marginBottom:  (height * 1.5) / 100, 
   },
   buttonArea: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    marginBottom: 15,
+    marginBottom: (height * 1.5) / 100,
   },
   topic: {
     fontSize: 25,
     marginLeft: 15,
     fontWeight: 'bold',
-    marginTop: (height * 1.5) / 100,
-    marginBottom:  (height * 1.5) / 100,
-    color: '#000000',
+    marginTop: (height * 0.5) / 100,
+    marginBottom:  (height * 0.1) / 100,
+    color: '#767676',
   },
   subTopic:{
     fontSize: 20,
     marginLeft: 15,
     fontWeight: 'bold',
     marginTop: 10,
+    color: '#767676',
   },
   ButtonContainer: {
     elevation: 8,
@@ -379,10 +382,10 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     paddingVertical: 10,
     paddingHorizontal: 12,
-    marginTop: 0,
+    marginTop: (height * 1.5) / 100,
     marginLeft: (width*10)/ 100,
     marginRight: (width*10)/ 100,
-    marginBottom: 10,
+    marginBottom:(height * 1.5) / 100,
     
   },
   ButtonText: {

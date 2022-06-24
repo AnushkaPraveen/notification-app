@@ -180,14 +180,14 @@ const IntervalSheduleNotification = () => {
           <TextInput
             style={styles.input}
             value={values.channelId}
-            placeholder="e.g - channel123"
+            placeholder="e.g - channel123" placeholderTextColor = '#000'
             onChangeText={text => handleChange('channelId', text)}
           />
           <Text style={styles.inputText}>Channel Name</Text>
           <TextInput
             style={styles.input}
             value={values.channelName}
-            placeholder="e.g - Channel 123"
+            placeholder="e.g - Channel 123" placeholderTextColor = '#000'
             onChangeText={text => handleChange('channelName', text)}
           />
           <View>
@@ -218,7 +218,7 @@ const IntervalSheduleNotification = () => {
           <TextInput
             style={styles.input}
             value={values.notificationId}
-            placeholder="e.g - 123"
+            placeholder="e.g - 123" placeholderTextColor = '#000'
             onChangeText={text => handleChange('notificationId', text)}
           />
           <Text style={styles.inputText}>Title</Text>
@@ -227,14 +227,14 @@ const IntervalSheduleNotification = () => {
             value={values.title}
             numberOfLines={5}
             multiline={true}
-            placeholder="e.g - Notification Title"
+            placeholder="e.g - Notification Title" placeholderTextColor = '#000'
             onChangeText={text => handleChange('title', text)}
           />
           <Text style={styles.inputText}>Subtitle</Text>
           <TextInput
             style={styles.input}
             value={values.subtitle}
-            placeholder="e.g - Notification Subtitle"
+            placeholder="e.g - Notification Subtitle" placeholderTextColor = '#000'
             onChangeText={text => handleChange('subtitle', text)}
           />
           <Text style={styles.inputText}>Notification Body</Text>
@@ -243,7 +243,7 @@ const IntervalSheduleNotification = () => {
             value={values.body}
             numberOfLines={5}
             multiline={true}
-            placeholder="Main body content of the notification"
+            placeholder="Main body content of the notification" placeholderTextColor = '#000'
             onChangeText={text => handleChange('body', text)}
           />
         </View>
@@ -274,7 +274,7 @@ const IntervalSheduleNotification = () => {
           <TextInput
           style={styles.input}
           value={values.interval}
-          placeholder="e.g - 15"
+          placeholder="e.g - 15" placeholderTextColor = '#000'
           keyboardType='numeric'
           onChangeText={text => handleChange('interval', text)}
         />
@@ -325,14 +325,14 @@ const IntervalSheduleNotification = () => {
         <TextInput
           style={styles.input}
           value={values.icon}
-          placeholder="URL"
+          placeholder="URL" placeholderTextColor = '#000'
           onChangeText={text => handleChange('icon', text)}
         />
         <Text style={styles.inputText}>Image</Text>
         <TextInput
           style={styles.input}
           value={values.image}
-          placeholder="URL"
+          placeholder="URL" placeholderTextColor = '#000'
           onChangeText={text => handleChange('image', text)}
         />
         <View>
@@ -463,6 +463,7 @@ const IntervalSheduleNotification = () => {
           <Text>Title</Text>
           <TextInput
           style={styles.actionInput}
+          placeholder="Okay" placeholderTextColor = '#000'
           //value={values.item.title}
           onChangeText={text => handleChange(item.title, text)}
         />
@@ -471,6 +472,7 @@ const IntervalSheduleNotification = () => {
           <Text>Id</Text>
           <TextInput
           style={styles.actionInput}
+          placeholder="e.g - 1" placeholderTextColor = '#000'
           //value={values.item.id}
           onChangeText={text => handleChange(item.id, text)}
         />
@@ -518,6 +520,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderRadius: 8,
     paddingLeft: 15,
+    color: '#000000',
   },
   specialInput:{
     height:100,
@@ -525,7 +528,7 @@ const styles = StyleSheet.create({
   },
   inputText: {
     marginLeft: 20,
-    color: '#000000',
+    color: '#9f9c9c',
   },
   buttonArea: {
     flex: 1,
@@ -538,6 +541,7 @@ const styles = StyleSheet.create({
     marginLeft: 15,
     fontWeight: 'bold',
     marginTop: 10,
+    color: '#767676'
   },
   modalView: {
     margin: 20,
